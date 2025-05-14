@@ -1,8 +1,7 @@
-package org.sales.management
+package org.sales.management.core.navigation
 
 import androidx.compose.runtime.Composable
 import androidx.navigation.NavHostController
-import androidx.navigation.compose.NavHost
 
 @Composable
 fun AppNavGraph(

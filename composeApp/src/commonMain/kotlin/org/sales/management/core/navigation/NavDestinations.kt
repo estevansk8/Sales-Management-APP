@@ -1,4 +1,4 @@
-package org.sales.management
+package org.sales.management.core.navigation
 
 import kotlinx.serialization.Serializable
 
