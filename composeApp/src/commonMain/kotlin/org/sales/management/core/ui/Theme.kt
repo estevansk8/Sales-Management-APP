@@ -19,7 +19,7 @@ fun ManagementSalesTheme(
     }
 
     MaterialTheme(
-        colorScheme = colorScheme,
+        colorScheme = lightScheme,
         content = content
     )
 }
