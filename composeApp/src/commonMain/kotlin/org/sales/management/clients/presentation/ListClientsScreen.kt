@@ -15,6 +15,5 @@ fun ListClientsScreen() {
         Column(horizontalAlignment = Alignment.CenterHorizontally) {
             Text(text = "List Clients Screen")
         }
-
     }
 }
