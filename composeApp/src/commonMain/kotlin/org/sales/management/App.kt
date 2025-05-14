@@ -11,19 +11,21 @@ import androidx.compose.runtime.*
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import org.jetbrains.compose.resources.painterResource
+import androidx.navigation.compose.rememberNavController
 import org.jetbrains.compose.ui.tooling.preview.Preview
 
 import managementsalesapp.composeapp.generated.resources.Res
 import managementsalesapp.composeapp.generated.resources.compose_multiplatform
+import org.sales.management.core.ui.ManagementSalesTheme
 
 @Composable
 @Preview
 fun App() {
-    MaterialTheme {
+    ManagementSalesTheme {
         var showContent by remember { mutableStateOf(false) }
         Column(Modifier.fillMaxWidth(), horizontalAlignment = Alignment.CenterHorizontally) {
             Button(onClick = { showContent = !showContent }) {
-                Text("Click me!")
+                Text("Vai Corinthians!")
             }
             AnimatedVisibility(showContent) {
                 val greeting = remember { Greeting().greet() }
