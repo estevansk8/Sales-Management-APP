@@ -73,6 +73,7 @@ kotlin {
             implementation(libs.androidx.lifecycle.runtime.compose)
             implementation(libs.navigation.compose)
             implementation(libs.ktor.client.core)
+            implementation(libs.kotlinx.coroutines.core)
         }
         desktopMain.dependencies {
             implementation(compose.desktop.currentOs)
@@ -112,8 +113,9 @@ android {
 }
 
 dependencies {
-    implementation("androidx.compose.material3:material3-android:1.3.2")
-    implementation("androidx.navigation:navigation-runtime-android:2.9.0")
+    implementation(libs.androidx.material3.android)
+    implementation(libs.androidx.navigation.runtime.android)
+    implementation(libs.kotlinx.coroutines.android)
     debugImplementation(compose.uiTooling)
 }
 
