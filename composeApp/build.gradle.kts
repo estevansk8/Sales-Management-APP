@@ -76,12 +76,13 @@ kotlin {
             implementation(libs.ktor.client.core)
             implementation(libs.bundles.ktor)
         }
+        nativeMain.dependencies {
+            implementation(libs.ktor.client.darwin)
+        }
         desktopMain.dependencies {
             implementation(compose.desktop.currentOs)
             implementation(libs.kotlinx.coroutines.swing)
-        }
-        iosMain.dependencies {
-            implementation(libs.ktor.client.darwin)
+            implementation(libs.ktor.client.okhttp)
         }
     }
 }
