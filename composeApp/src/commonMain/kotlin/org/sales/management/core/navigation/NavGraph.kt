@@ -4,7 +4,7 @@ import androidx.compose.runtime.Composable
 import androidx.navigation.NavHostController
 import androidx.navigation.compose.NavHost
 import androidx.navigation.compose.composable
-import org.sales.management.clients.presentation.ListClientsScreen
+import org.sales.management.clients.presentation.list.ListClientsScreen
 
 
 @Composable

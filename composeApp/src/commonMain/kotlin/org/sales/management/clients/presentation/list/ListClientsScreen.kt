@@ -1,4 +1,4 @@
-package org.sales.management.clients.presentation
+package org.sales.management.clients.presentation.list
 
 import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.Column
