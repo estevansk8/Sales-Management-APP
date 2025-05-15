@@ -1,4 +1,28 @@
 package org.sales.management.clients.data.remote
 
-class ClientsApi {
+import io.ktor.client.HttpClient
+import io.ktor.client.call.body
+import io.ktor.client.request.get
+import io.ktor.client.statement.HttpResponse
+import io.ktor.http.HttpStatusCode
+import org.sales.management.clients.domain.model.ClientsResponse
+
+class ClientsApi (
+    private val httpClient: HttpClient
+){
+    private val baseUrl = "http://10.10.0.175:8080/clients"
+
+    suspend fun listClient(): ClientsResponse? {
+        val response : HttpResponse = httpClient.get(baseUrl)
+
+        println(response.status.toString())
+
+        return when (response.status){
+            HttpStatusCode.OK -> {
+                val clientsResponse : ClientsResponse = response.body()
+                return clientsResponse
+            }
+            else -> null
+        }
+    }
 }
