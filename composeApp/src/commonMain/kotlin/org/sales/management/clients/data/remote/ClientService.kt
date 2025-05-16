@@ -8,7 +8,7 @@ import io.ktor.http.HttpStatusCode
 import org.sales.management.clients.domain.model.Client
 import org.sales.management.clients.domain.model.ClientsResponse
 
-class ClientsApi (
+class ClientService (
     private val httpClient: HttpClient
 ){
     private val baseUrl = "http://192.168.1.169:8080/clients"

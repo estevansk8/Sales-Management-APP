@@ -8,11 +8,11 @@ import androidx.compose.runtime.Composable
 import androidx.compose.runtime.LaunchedEffect
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
-import org.sales.management.clients.data.remote.ClientsApi
+import org.sales.management.clients.data.remote.ClientService
 
 @Composable
 fun ListClientsScreen(
-    ktorEngine: ClientsApi,
+    ktorEngine: ClientService,
 ) {
 
     LaunchedEffect(Unit) {

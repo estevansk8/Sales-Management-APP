@@ -9,17 +9,17 @@ import androidx.lifecycle.viewModelScope
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
 import org.sales.management.clients.domain.repository.ClientRepository
-import org.sales.management.clients.data.repositories.ClientRepositoryImpl
 import org.sales.management.clients.domain.model.Client
 
-class ListClientsViewModel : ViewModel() {
-    private val instructorsRetriever: ClientRepository = ClientRepositoryImpl()
+class ListClientsViewModel(
+    private val repository: ClientRepository
+) : ViewModel() {
 
     var clients = mutableStateListOf<Client>()
     var isLoading by mutableStateOf(false)
 
     suspend fun getClients(): List<Client>? {
-        return instructorsRetriever.getAllClients()
+        return repository.getAllClients()
     }
 
     fun listClients(){

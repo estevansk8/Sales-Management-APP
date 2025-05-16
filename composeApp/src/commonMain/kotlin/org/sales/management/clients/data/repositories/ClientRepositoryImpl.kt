@@ -1,14 +1,15 @@
 package org.sales.management.clients.data.repositories
 
-import org.sales.management.clients.data.remote.ClientsApi
+import org.sales.management.clients.data.remote.ClientService
 import org.sales.management.clients.domain.model.Client
 import org.sales.management.clients.domain.repository.ClientRepository
 
-class ClientRepositoryImpl : ClientRepository {
-    private val client = ClientsApi()
+class ClientRepositoryImpl(
+    private val service: ClientService
+) : ClientRepository {
 
     override suspend fun getAllClients(): List<Client>? {
-        return client.getClients()
+        TODO("Not yet implemented")
     }
 
     override suspend fun getClientById(id: Long): Client? {
