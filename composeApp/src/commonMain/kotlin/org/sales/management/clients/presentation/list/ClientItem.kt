@@ -36,7 +36,7 @@ fun ClientItem(client: Client) {
             modifier = Modifier
                 .size(40.dp)
                 .clip(CircleShape)
-                .background()
+                .background(MaterialTheme.colorScheme.primary)
         ) {
             Text(
                 text = initial,
