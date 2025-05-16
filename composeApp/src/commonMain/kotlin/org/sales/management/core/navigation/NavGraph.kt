@@ -6,6 +6,7 @@ import androidx.navigation.compose.NavHost
 import androidx.navigation.compose.composable
 import org.sales.management.clients.presentation.list.ClientsListScreen
 import org.sales.management.clients.presentation.form.ClientFormsScreen
+import org.sales.management.home.presentation.HomeScreen
 
 
 @Composable
@@ -15,8 +16,15 @@ fun AppNavGraph(
 //    val commonTypeMap = mapOf(typeOf<InstructorDto>() to CustomNavTypes.InstructorType)
     NavHost(
         navController = navController,
-        startDestination = ClientsListScreen,
+        startDestination = HomeScreen,
     ) {
+        composable<HomeScreen>{
+            HomeScreen(
+                goToClients = {
+                    navController.navigate(ClientsListScreen)
+                }
+            )
+        }
         composable<ClientsListScreen>{
             ClientsListScreen(
                 goToClientForm = {
