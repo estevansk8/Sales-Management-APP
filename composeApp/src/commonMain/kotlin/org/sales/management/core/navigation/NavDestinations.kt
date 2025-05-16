@@ -6,4 +6,4 @@ import kotlinx.serialization.Serializable
 object ClientsListScreen
 
 @Serializable
-object AddClientScreen
+object ClientsFormScreen
