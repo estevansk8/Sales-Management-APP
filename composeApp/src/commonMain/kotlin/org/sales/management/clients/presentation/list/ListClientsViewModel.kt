@@ -18,20 +18,24 @@ class ListClientsViewModel(
     var clients = mutableStateListOf<Client>()
     var isLoading by mutableStateOf(false)
 
-    suspend fun getClients(): List<Client>? {
+    private suspend fun getClients(): List<Client>? {
+        println("Entrou getClients")
         return repository.getAllClients()
     }
 
     fun listClients(){
-        isLoading = true
-        try {
-            viewModelScope.launch(Dispatchers.Default) {
-                clients.addAll(getClients() ?: emptyList())
+        viewModelScope.launch(Dispatchers.Default) {
+            isLoading = true
+            try {
+                println("Entrou listClients")
+                val result = getClients()
+                clients.clear()
+                clients.addAll(result ?: emptyList())
+            } catch (e: Exception) {
+                println("Erro ao buscar clientes: ${e.message}")
+            } finally {
+                isLoading = false
             }
-        }catch (e: Exception){
-            println(e.message)
-        }finally {
-            isLoading = false
         }
 
     }
