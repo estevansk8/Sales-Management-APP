@@ -14,9 +14,9 @@ fun AppNavGraph(
 //    val commonTypeMap = mapOf(typeOf<InstructorDto>() to CustomNavTypes.InstructorType)
     NavHost(
         navController = navController,
-        startDestination = ListClientsScreen,
+        startDestination = ClientsListScreen,
     ) {
-        composable<ListClientsScreen>{
+        composable<ClientsListScreen>{
             ClientsListScreen()
         }
     }
