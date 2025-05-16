@@ -11,7 +11,7 @@ import kotlinx.coroutines.launch
 import org.sales.management.clients.domain.repository.ClientRepository
 import org.sales.management.clients.domain.model.Client
 
-class ListClientsViewModel(
+class ClientsListViewModel(
     private val repository: ClientRepository
 ) : ViewModel() {
 

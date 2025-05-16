@@ -4,7 +4,7 @@ import androidx.compose.runtime.Composable
 import androidx.navigation.NavHostController
 import androidx.navigation.compose.NavHost
 import androidx.navigation.compose.composable
-import org.sales.management.clients.presentation.list.ListClientsScreen
+import org.sales.management.clients.presentation.list.ClientsListScreen
 
 
 @Composable
@@ -17,7 +17,7 @@ fun AppNavGraph(
         startDestination = ListClientsScreen,
     ) {
         composable<ListClientsScreen>{
-            ListClientsScreen()
+            ClientsListScreen()
         }
     }
 }
