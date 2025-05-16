@@ -22,6 +22,7 @@ import org.koin.compose.viewmodel.koinViewModel
 
 @Composable
 fun ClientsListScreen(
+    goToClientForm: () -> Unit,
     viewModel: ClientsListViewModel = koinViewModel()
 ) {
     val clients = viewModel.clients
@@ -42,7 +43,7 @@ fun ClientsListScreen(
             FloatingActionButton(
                 backgroundColor = MaterialTheme.colorScheme.primary,
                 onClick = {
-
+                    goToClientForm()
                 }
             ) {
 //                Icon(

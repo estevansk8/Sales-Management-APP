@@ -3,9 +3,13 @@ package org.sales.management.clients.data.remote
 import io.ktor.client.HttpClient
 import io.ktor.client.call.body
 import io.ktor.client.request.get
+import io.ktor.client.request.post
+import io.ktor.client.request.setBody
 import io.ktor.client.statement.HttpResponse
 import io.ktor.http.HttpStatusCode
 import org.sales.management.clients.domain.model.Client
+import org.sales.management.clients.domain.model.ClientRequest
+import org.sales.management.clients.domain.model.ClientDTO
 import org.sales.management.clients.domain.model.ClientsResponse
 
 class ClientService (
@@ -24,6 +28,20 @@ class ClientService (
                 return clientsResponse.data
             }
             else -> null
+        }
+    }
+
+    suspend fun createClient(request: ClientRequest): ClientDTO {
+        val response: HttpResponse = httpClient.post(baseUrl) {
+            setBody(request)
+        }
+
+        return when (response.status) {
+            HttpStatusCode.OK -> {
+                response.body()
+            }
+
+            else -> throw Exception("Erro ao criar cliente")
         }
     }
 }

@@ -5,6 +5,7 @@ import org.koin.dsl.module
 import org.sales.management.clients.data.remote.ClientService
 import org.sales.management.clients.domain.repository.ClientRepository
 import org.sales.management.clients.presentation.list.ClientsListViewModel
+import org.sales.management.clients.presentation.form.ClientFormsViewModel
 import org.sales.management.clients.data.repositories.ClientRepositoryImpl
 import org.sales.management.core.ktor.buildHttpClient
 import org.sales.management.core.ktor.getHttpEngine
@@ -27,6 +28,12 @@ private val dataModule = module {
 private val viewModelModule = module {
     viewModel {
         ClientsListViewModel(
+            repository = get()
+        )
+    }
+
+    viewModel {
+        ClientFormsViewModel(
             repository = get()
         )
     }

@@ -31,11 +31,7 @@ fun ClientFormsScreen(
     var address by remember { mutableStateOf("") }
 
 
-    Scaffold(
-//        topBar = {
-//            TopAppBar(title = { Text("Adicionar Cliente") })
-//        }
-    ) { padding ->
+    Scaffold() { padding ->
         Column(
             modifier = Modifier
                 .fillMaxSize()
@@ -69,9 +65,9 @@ fun ClientFormsScreen(
 
             Button(
                 onClick = {
-                    println("Cliente a ser adicionado: $name")
+                    viewModel.saveClient(name, phone, address)
                 },
-                modifier = Modifier.align(Alignment.End)
+                modifier = Modifier.align(Alignment.CenterHorizontally)
             ) {
                 Text("Cadastar")
             }

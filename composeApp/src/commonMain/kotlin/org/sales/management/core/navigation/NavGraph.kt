@@ -18,7 +18,11 @@ fun AppNavGraph(
         startDestination = ClientsListScreen,
     ) {
         composable<ClientsListScreen>{
-            ClientsListScreen()
+            ClientsListScreen(
+                goToClientForm = {
+                    navController.navigate(ClientsFormScreen)
+                }
+            )
         }
         composable<ClientsFormScreen>{
             ClientFormsScreen()
