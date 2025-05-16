@@ -9,7 +9,7 @@ class ClientRepositoryImpl(
 ) : ClientRepository {
 
     override suspend fun getAllClients(): List<Client>? {
-        TODO("Not yet implemented")
+        return service.getClients()
     }
 
     override suspend fun getClientById(id: Long): Client? {
