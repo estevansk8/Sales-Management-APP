@@ -2,6 +2,7 @@ package org.sales.management.clients.data.remote
 
 import io.ktor.client.HttpClient
 import io.ktor.client.call.body
+import io.ktor.client.request.delete
 import io.ktor.client.request.get
 import io.ktor.client.request.post
 import io.ktor.client.request.setBody
@@ -15,7 +16,7 @@ import org.sales.management.clients.domain.model.ClientsResponse
 class ClientService (
     private val httpClient: HttpClient
 ){
-    private val baseUrl = "http://192.168.1.169:8080/clients"
+    private val baseUrl = "http://10.10.0.175:8080/clients"
 
     suspend fun getClients(): List<Client>? {
         val response : HttpResponse = httpClient.get(baseUrl)
@@ -43,5 +44,9 @@ class ClientService (
 
             else -> throw Exception("Erro ao criar cliente")
         }
+    }
+
+    suspend fun deleteClient(id: Long) {
+        val response: HttpResponse = httpClient.delete("$baseUrl/$id")
     }
 }

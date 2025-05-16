@@ -34,11 +34,6 @@ fun ClientsListScreen(
     }
 
     Scaffold(
-//        topBar = {
-//            TopAppBar(
-//                title = { Text("Lista de Clientes") }
-//            )
-//        },
         floatingActionButton = {
             FloatingActionButton(
                 backgroundColor = MaterialTheme.colorScheme.primary,
@@ -46,11 +41,7 @@ fun ClientsListScreen(
                     goToClientForm()
                 }
             ) {
-//                Icon(
-//                    imageVector = Icons,
-//                    contentDescription = "Adicionar Cliente",
-//                    tint = androidx.compose.ui.graphics.Color.White
-//                )
+
             }
         },
     ){

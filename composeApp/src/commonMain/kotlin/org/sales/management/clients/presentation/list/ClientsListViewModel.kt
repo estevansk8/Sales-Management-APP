@@ -40,4 +40,21 @@ class ClientsListViewModel(
 
     }
 
+    private suspend fun deleteClient(id: Long){
+        repository.deleteClient(id)
+    }
+
+    fun removeClient(id: Long){
+        viewModelScope.launch(Dispatchers.Default) {
+            isLoading = true
+            try {
+                deleteClient(id)
+            } catch (e: Exception) {
+                println("Erro ao buscar clientes: ${e.message}")
+                } finally {
+                isLoading = false
+            }
+        }
+    }
+
 }

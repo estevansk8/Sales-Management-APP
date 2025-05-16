@@ -27,7 +27,7 @@ class ClientRepositoryImpl(
     }
 
     override suspend fun deleteClient(id: Long) {
-        TODO("Not yet implemented")
+        service.deleteClient(id)
     }
 
     fun ClientDTO.toDomain() = Client(id, name, phone, address)
