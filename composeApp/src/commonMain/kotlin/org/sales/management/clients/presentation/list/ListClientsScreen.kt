@@ -16,7 +16,7 @@ fun ListClientsScreen(
 ) {
 
     LaunchedEffect(Unit) {
-        val clients = ktorEngine.listClient()
+        val clients = ktorEngine.getClients()
         println(clients)
     }
 
