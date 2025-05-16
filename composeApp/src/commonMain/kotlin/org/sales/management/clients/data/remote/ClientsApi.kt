@@ -5,14 +5,15 @@ import io.ktor.client.call.body
 import io.ktor.client.request.get
 import io.ktor.client.statement.HttpResponse
 import io.ktor.http.HttpStatusCode
+import org.sales.management.clients.domain.model.Client
 import org.sales.management.clients.domain.model.ClientsResponse
 
 class ClientsApi (
     private val httpClient: HttpClient
 ){
-    private val baseUrl = "http://10.10.0.175:8080/clients"
+    private val baseUrl = "http://192.168.1.169:8080/clients"
 
-    suspend fun listClient(): ClientsResponse? {
+    suspend fun getClients(): List<Client>? {
         val response : HttpResponse = httpClient.get(baseUrl)
 
         println(response.status.toString())
@@ -20,7 +21,7 @@ class ClientsApi (
         return when (response.status){
             HttpStatusCode.OK -> {
                 val clientsResponse : ClientsResponse = response.body()
-                return clientsResponse
+                return clientsResponse.data
             }
             else -> null
         }
