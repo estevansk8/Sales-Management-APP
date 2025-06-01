@@ -126,6 +126,7 @@ dependencies {
     implementation(libs.androidx.material3.android)
     implementation(libs.androidx.navigation.runtime.android)
     implementation(libs.kotlinx.coroutines.android)
+    implementation(libs.androidx.foundation.layout.android)
     debugImplementation(compose.uiTooling)
 }
 

@@ -15,8 +15,14 @@ import androidx.compose.foundation.layout.size
 import androidx.compose.foundation.layout.width
 import androidx.compose.foundation.rememberScrollState
 import androidx.compose.foundation.shape.CircleShape
+import androidx.compose.material.icons.Icons
+import androidx.compose.material.icons.filled.CalendarMonth
+import androidx.compose.material.icons.filled.Inventory2
+import androidx.compose.material.icons.filled.Money
 import androidx.compose.material.icons.filled.Notifications
+import androidx.compose.material.icons.filled.People
 import androidx.compose.material.icons.filled.Person
+import androidx.compose.material.icons.filled.ShoppingCart
 import androidx.compose.material3.Icon
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Alignment
@@ -37,10 +43,10 @@ fun HomeScreen(
     goToClients : () -> Unit,
 ){
     val listofFeatures = listOf(
-        Feature("Clientes", goToClients),
-        Feature("Produtos", {  }),
-        Feature("Vendas", {  }),
-        Feature("Relatórios", {  }),
+        Feature(Icons.Default.People,"Clientes", goToClients),
+        Feature(Icons.Default.Inventory2,"Produtos", {  }),
+        Feature(Icons.Default.ShoppingCart,"Vendas", {  }),
+        Feature(Icons.Default.Money,"Gastos", {  }),
     )
 
     Box(
@@ -71,7 +77,7 @@ fun HomeScreen(
                         .background(Color.Gray)
                 ){
                     Icon(
-                        imageVector = androidx.compose.material.icons.Icons.Default.Notifications,
+                        imageVector = Icons.Default.Notifications,
                         contentDescription = "Perfil",
                         tint = Color.White,
                         modifier = Modifier.padding(8.dp).align(Alignment.Center)
@@ -87,7 +93,7 @@ fun HomeScreen(
                         .background(Color.Gray)
                 ){
                     Icon(
-                        imageVector = androidx.compose.material.icons.Icons.Default.Person,
+                        imageVector = Icons.Default.Person,
                         contentDescription = "Perfil",
                         tint = Color.White,
                         modifier = Modifier.padding(8.dp).align(Alignment.Center)
@@ -114,12 +120,42 @@ fun HomeScreen(
 
                 listofFeatures.forEach { feature ->
                     FeatureCard(
+                        image = feature.image,
                         feature = feature.title,
                         goToFeature = feature.action
                     )
                 }
             }
+
+            Spacer(modifier = Modifier.height(16.dp))
+
+            Row(
+                modifier = Modifier
+                    .fillMaxWidth()
+                    .padding(start = 16.dp, end = 16.dp),
+                verticalAlignment = Alignment.CenterVertically
+            ) {
+                Text(
+                    text = "Atividades do dia",
+                    fontSize = 24.sp,
+                    fontWeight = FontWeight.Bold,
+                    modifier = Modifier.weight(1f)
+
+                )
+
+                Box(
+                    modifier = Modifier
+                        .size(48.dp)
+                        .background(Color.Transparent),
+                    contentAlignment = Alignment.Center
+                ){
+                    Icon(
+                        imageVector = Icons.Default.CalendarMonth,
+                        contentDescription = "Calendar",
+                        tint = Color.Black,
+                    )
+                }
+            }
         }
-        // Topo
     }
 }
