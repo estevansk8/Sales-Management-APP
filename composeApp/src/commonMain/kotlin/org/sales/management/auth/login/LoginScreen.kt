@@ -2,6 +2,7 @@ package org.sales.management.auth.login
 
 import androidx.compose.foundation.Image
 import androidx.compose.foundation.background
+import androidx.compose.foundation.clickable
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.Spacer
 import androidx.compose.foundation.layout.fillMaxSize
@@ -24,10 +25,14 @@ import androidx.compose.material3.Surface
 
 
 import androidx.compose.ui.input.key.Key.Companion.R
+import androidx.compose.ui.text.SpanStyle
+import androidx.compose.ui.text.buildAnnotatedString
 import androidx.compose.ui.text.style.TextAlign
+import androidx.compose.ui.text.withStyle
 import androidx.compose.ui.unit.dp
 import managementsalesapp.composeapp.generated.resources.Res
 import managementsalesapp.composeapp.generated.resources.compose_multiplatform
+import managementsalesapp.composeapp.generated.resources.login
 import org.jetbrains.compose.resources.painterResource
 
 @Composable
@@ -39,15 +44,12 @@ fun LoginScreen(onLogin: () -> Unit) {
             .padding(16.dp),
         horizontalAlignment = Alignment.CenterHorizontally
     ) {
-        Spacer(modifier = Modifier.height(32.dp))
 
         Image(
-            painter = painterResource(Res.drawable.compose_multiplatform),
+            painter = painterResource(Res.drawable.login),
             contentDescription = null,
-            modifier = Modifier.size(200.dp)
+            modifier = Modifier.size(300.dp)
         )
-
-        Spacer(modifier = Modifier.height(32.dp))
 
         Surface(
             shape = RoundedCornerShape(topStart = 32.dp, topEnd = 32.dp),
@@ -97,9 +99,14 @@ fun LoginScreen(onLogin: () -> Unit) {
                     Text("Login")
                 }
                 Text(
-                    text = "Esqueceu a senha?",
+                    text = buildAnnotatedString {
+                        append("Não tem uma conta? ")
+                        withStyle(style = SpanStyle(color = Color(0xFF66A06F), fontWeight = FontWeight.Bold)) {
+                            append("Criar conta")
+                        }
+                    },
                     color = Color(0xFF66A06F),
-                    modifier = Modifier.padding(top = 16.dp)
+                    modifier = Modifier.padding(top = 16.dp).clickable {  }
                 )
             }
         }
