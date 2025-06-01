@@ -24,6 +24,7 @@ import androidx.compose.material.icons.filled.People
 import androidx.compose.material.icons.filled.Person
 import androidx.compose.material.icons.filled.ShoppingCart
 import androidx.compose.material3.Icon
+import androidx.compose.material3.Scaffold
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
@@ -32,9 +33,14 @@ import androidx.compose.ui.unit.dp
 import org.sales.management.home.presentation.itens.FeatureCard
 import org.sales.management.home.presentation.itens.SalesCard
 import androidx.compose.material3.Text
+import androidx.compose.runtime.getValue
+import androidx.compose.runtime.mutableStateOf
+import androidx.compose.runtime.remember
+import androidx.compose.runtime.setValue
 import androidx.compose.ui.draw.clip
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.unit.sp
+import org.sales.management.core.ui.CustomBottomBar
 import org.sales.management.home.domain.Feature
 
 
@@ -49,111 +55,124 @@ fun HomeScreen(
         Feature(Icons.Default.Money,"Gastos", {  }),
     )
 
-    Box(
-        modifier = Modifier.fillMaxSize()
-    ) {
-        // Conteúdo principal
-        Column(
-            horizontalAlignment = Alignment.CenterHorizontally,
-            verticalArrangement = Arrangement.Top,
+    var selectedTab by remember { mutableStateOf(0) }
+
+    Scaffold(
+        bottomBar = {
+            CustomBottomBar(
+                selectedIndex = selectedTab,
+                onItemSelected = { selectedTab = it }
+            )
+        },
+    ){
+        innerPadding ->
+
+        Box(
             modifier = Modifier.fillMaxSize()
         ) {
-            Row(
-                modifier = Modifier
-                    .fillMaxWidth()
-                    .padding(top = 8.dp, start = 16.dp, end = 16.dp),
-                verticalAlignment = Alignment.CenterVertically
+            // Conteúdo principal
+            Column(
+                horizontalAlignment = Alignment.CenterHorizontally,
+                verticalArrangement = Arrangement.Top,
+                modifier = Modifier.fillMaxSize()
             ) {
-                Text(
-                    text = "Olá\nEstevan!",
-                    fontSize = 24.sp,
-                    modifier = Modifier.weight(1f)
-                )
-
-                Box(
+                Row(
                     modifier = Modifier
-                        .size(48.dp)
-                        .clip(CircleShape)
-                        .background(Color.Gray)
-                ){
-                    Icon(
-                        imageVector = Icons.Default.Notifications,
-                        contentDescription = "Perfil",
-                        tint = Color.White,
-                        modifier = Modifier.padding(8.dp).align(Alignment.Center)
+                        .fillMaxWidth()
+                        .padding(top = 8.dp, start = 16.dp, end = 16.dp),
+                    verticalAlignment = Alignment.CenterVertically
+                ) {
+                    Text(
+                        text = "Olá\nEstevan!",
+                        fontSize = 24.sp,
+                        modifier = Modifier.weight(1f)
                     )
+
+                    Box(
+                        modifier = Modifier
+                            .size(48.dp)
+                            .clip(CircleShape)
+                            .background(Color.Gray)
+                    ){
+                        Icon(
+                            imageVector = Icons.Default.Notifications,
+                            contentDescription = "Perfil",
+                            tint = Color.White,
+                            modifier = Modifier.padding(8.dp).align(Alignment.Center)
+                        )
+                    }
+
+                    Spacer(modifier = Modifier.width(4.dp))
+
+                    Box(
+                        modifier = Modifier
+                            .size(48.dp)
+                            .clip(CircleShape)
+                            .background(Color.Gray)
+                    ){
+                        Icon(
+                            imageVector = Icons.Default.Person,
+                            contentDescription = "Perfil",
+                            tint = Color.White,
+                            modifier = Modifier.padding(8.dp).align(Alignment.Center)
+                        )
+                    }
                 }
 
-                Spacer(modifier = Modifier.width(4.dp))
+                Spacer(modifier = Modifier.height(8.dp))
 
-                Box(
-                    modifier = Modifier
-                        .size(48.dp)
-                        .clip(CircleShape)
-                        .background(Color.Gray)
-                ){
-                    Icon(
-                        imageVector = Icons.Default.Person,
-                        contentDescription = "Perfil",
-                        tint = Color.White,
-                        modifier = Modifier.padding(8.dp).align(Alignment.Center)
-                    )
-                }
-            }
+                SalesCard {  }
 
-            Spacer(modifier = Modifier.height(8.dp))
-
-            SalesCard {  }
-
-            Text(
-                text = "Meu negócio",
-                fontSize = 24.sp,
-                fontWeight = FontWeight.Bold,
-                modifier = Modifier.align(Alignment.Start).padding(start = 16.dp, bottom = 8.dp)
-            )
-
-            Row(
-                modifier = Modifier
-                    .fillMaxWidth()
-                    .horizontalScroll(rememberScrollState())
-            ) {
-
-                listofFeatures.forEach { feature ->
-                    FeatureCard(
-                        image = feature.image,
-                        feature = feature.title,
-                        goToFeature = feature.action
-                    )
-                }
-            }
-
-            Spacer(modifier = Modifier.height(16.dp))
-
-            Row(
-                modifier = Modifier
-                    .fillMaxWidth()
-                    .padding(start = 16.dp, end = 16.dp),
-                verticalAlignment = Alignment.CenterVertically
-            ) {
                 Text(
-                    text = "Atividades do dia",
+                    text = "Meu negócio",
                     fontSize = 24.sp,
                     fontWeight = FontWeight.Bold,
-                    modifier = Modifier.weight(1f)
-
+                    modifier = Modifier.align(Alignment.Start).padding(start = 16.dp, bottom = 8.dp)
                 )
 
-                Box(
+                Row(
                     modifier = Modifier
-                        .size(48.dp)
-                        .background(Color.Transparent),
-                    contentAlignment = Alignment.Center
-                ){
-                    Icon(
-                        imageVector = Icons.Default.CalendarMonth,
-                        contentDescription = "Calendar",
-                        tint = Color.Black,
+                        .fillMaxWidth()
+                        .horizontalScroll(rememberScrollState())
+                ) {
+
+                    listofFeatures.forEach { feature ->
+                        FeatureCard(
+                            image = feature.image,
+                            feature = feature.title,
+                            goToFeature = feature.action
+                        )
+                    }
+                }
+
+                Spacer(modifier = Modifier.height(16.dp))
+
+                Row(
+                    modifier = Modifier
+                        .fillMaxWidth()
+                        .padding(start = 16.dp, end = 16.dp),
+                    verticalAlignment = Alignment.CenterVertically
+                ) {
+                    Text(
+                        text = "Atividades do dia",
+                        fontSize = 24.sp,
+                        fontWeight = FontWeight.Bold,
+                        modifier = Modifier.weight(1f)
+
                     )
+
+                    Box(
+                        modifier = Modifier
+                            .size(48.dp)
+                            .background(Color.Transparent),
+                        contentAlignment = Alignment.Center
+                    ){
+                        Icon(
+                            imageVector = Icons.Default.CalendarMonth,
+                            contentDescription = "Calendar",
+                            tint = Color.Black,
+                        )
+                    }
                 }
             }
         }
