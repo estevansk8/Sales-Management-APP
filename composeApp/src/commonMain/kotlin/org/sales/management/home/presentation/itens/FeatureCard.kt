@@ -23,6 +23,7 @@ import androidx.compose.runtime.remember
 import androidx.compose.runtime.setValue
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
+import androidx.compose.ui.draw.clip
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.input.key.Key.Companion.R
 import androidx.compose.ui.text.font.FontWeight
@@ -35,7 +36,6 @@ fun FeatureCard(
     goToFeature: () -> Unit
 ) {
     Column(
-        modifier = Modifier.clickable { goToFeature() },
         horizontalAlignment = Alignment.CenterHorizontally
     ){
         Card(
@@ -47,6 +47,8 @@ fun FeatureCard(
                 .width(152.dp)
                 .height(68.dp)
                 .padding(start = 16.dp)
+                .clip(RoundedCornerShape(16.dp))
+                .clickable { goToFeature() }
         ) {
             Row(
                 verticalAlignment = Alignment.CenterVertically,
