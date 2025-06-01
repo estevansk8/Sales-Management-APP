@@ -4,6 +4,7 @@ import androidx.compose.runtime.Composable
 import androidx.navigation.NavHostController
 import androidx.navigation.compose.NavHost
 import androidx.navigation.compose.composable
+import org.sales.management.auth.login.LoginScreen
 import org.sales.management.clients.presentation.list.ClientsListScreen
 import org.sales.management.clients.presentation.form.ClientFormsScreen
 import org.sales.management.home.presentation.HomeScreen
@@ -18,6 +19,10 @@ fun AppNavGraph(
         navController = navController,
         startDestination = HomeScreen,
     ) {
+
+        composable<LoginScreen>{
+            LoginScreen()
+        }
         composable<HomeScreen>{
             HomeScreen(
                 goToClients = {
