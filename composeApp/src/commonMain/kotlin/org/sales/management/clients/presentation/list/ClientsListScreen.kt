@@ -10,6 +10,8 @@ import androidx.compose.material.Divider
 import androidx.compose.material.FloatingActionButton
 import androidx.compose.material.Icon
 import androidx.compose.material.Scaffold
+import androidx.compose.material.icons.Icons
+import androidx.compose.material.icons.filled.Add
 import androidx.compose.material3.CircularProgressIndicator
 import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.Text
@@ -41,7 +43,11 @@ fun ClientsListScreen(
                     goToClientForm()
                 }
             ) {
-
+                Icon(
+                    imageVector = Icons.Default.Add,
+                    contentDescription = "Adicionar Cliente",
+                    tint = MaterialTheme.colorScheme.onPrimary
+                )
             }
         },
     ){
