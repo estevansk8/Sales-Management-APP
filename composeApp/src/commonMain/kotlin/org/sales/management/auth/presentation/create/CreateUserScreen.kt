@@ -1,4 +1,4 @@
-package org.sales.management.auth.create
+package org.sales.management.auth.presentation.create
 
 import androidx.compose.foundation.Image
 import androidx.compose.foundation.background
