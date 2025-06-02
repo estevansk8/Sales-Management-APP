@@ -18,14 +18,25 @@ fun AppNavGraph(
 //    val commonTypeMap = mapOf(typeOf<InstructorDto>() to CustomNavTypes.InstructorType)
     NavHost(
         navController = navController,
-        startDestination = CreateUserScreen,
+        startDestination = LoginScreen,
     ) {
 
         composable<LoginScreen>{
-            LoginScreen(){}
+            LoginScreen(
+                onLogin = {
+                    navController.navigate(HomeScreen)
+                },
+                onSignUp = {
+                    navController.navigate(CreateUserScreen)
+                }
+            )
         }
         composable<CreateUserScreen>{
-            CreateUserScreen(){}
+            CreateUserScreen(
+                onLogin = {
+                    navController.navigate(HomeScreen)
+                }
+            )
         }
         composable<HomeScreen>{
             HomeScreen(

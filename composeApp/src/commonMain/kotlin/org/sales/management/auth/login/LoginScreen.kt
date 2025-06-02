@@ -36,7 +36,10 @@ import managementsalesapp.composeapp.generated.resources.login
 import org.jetbrains.compose.resources.painterResource
 
 @Composable
-fun LoginScreen(onLogin: () -> Unit) {
+fun LoginScreen(
+    onLogin: () -> Unit,
+    onSignUp: () -> Unit
+) {
     Column(
         modifier = Modifier
             .fillMaxSize()
@@ -61,11 +64,11 @@ fun LoginScreen(onLogin: () -> Unit) {
                 horizontalAlignment = Alignment.CenterHorizontally
             ) {
                 Text(
-                    text = "Bem vindo\nnovamente\nEmpreendedor!",
+                    text = "Bem vindo\nEmpreendedor!",
                     fontWeight = FontWeight.Bold,
                     fontSize = 44.sp,
                     textAlign = TextAlign.Start,
-                    lineHeight = 40.sp,
+                    lineHeight = 52.sp,
                 )
 
                 Spacer(modifier = Modifier.height(24.dp))
@@ -106,7 +109,7 @@ fun LoginScreen(onLogin: () -> Unit) {
                         }
                     },
                     color = Color(0xFF66A06F),
-                    modifier = Modifier.padding(top = 16.dp).clickable {  }
+                    modifier = Modifier.padding(top = 16.dp).clickable { onSignUp() }
                 )
             }
         }

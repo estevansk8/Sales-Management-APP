@@ -33,7 +33,9 @@ import managementsalesapp.composeapp.generated.resources.login
 import org.jetbrains.compose.resources.painterResource
 
 @Composable
-fun CreateUserScreen(onLogin: () -> Unit) {
+fun CreateUserScreen(
+    onLogin: () -> Unit
+) {
     Column(
         modifier = Modifier
             .fillMaxSize()
