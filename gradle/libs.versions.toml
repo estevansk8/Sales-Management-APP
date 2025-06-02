@@ -24,6 +24,7 @@ coroutines = "1.9.0"
 navigationRuntimeAndroid = "2.9.0"
 koin = "4.0.0"
 foundationLayoutAndroid = "1.8.2"
+androidx-core-splashscreen = "1.1.1"
 
 
 [libraries]
@@ -47,6 +48,7 @@ navigation-compose = { group = "org.jetbrains.androidx.navigation", name = "navi
 kotlinx-serialization-json = { module = "org.jetbrains.kotlinx:kotlinx-serialization-json", version.ref = "kotlinxSerializationJson" }
 kotlinx-coroutines-core = { module = "org.jetbrains.kotlinx:kotlinx-coroutines-core", version.ref = "coroutines" }
 kotlinx-coroutines-android = { module = "org.jetbrains.kotlinx:kotlinx-coroutines-android", version.ref = "coroutines" }
+androidx-core-splashscreen = {module = "androidx.core:core-splashscreen", version.ref = "androidx-core-splashscreen" }
 
 ktor-client-core = { module = "io.ktor:ktor-client-core", version.ref = "ktor" }
 ktor-client-okhttp = { module = "io.ktor:ktor-client-okhttp", version.ref = "ktor" }
