@@ -35,7 +35,6 @@ fun SalesCard(
     goToCreateSale: () -> Unit,
 ) {
     Column(
-        modifier = Modifier.clickable { goToCreateSale() },
         horizontalAlignment = Alignment.CenterHorizontally
     ) {
         Card(
@@ -48,6 +47,8 @@ fun SalesCard(
                 .height(160.dp)
                 .padding(horizontal = 20.dp, vertical = 8.dp)
                 .padding(bottom = 16.dp)
+                .clip(RoundedCornerShape(16.dp))
+                .clickable { goToCreateSale() }
         ) {
             Row(
                 verticalAlignment = Alignment.Top,
