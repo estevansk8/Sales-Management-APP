@@ -29,8 +29,8 @@ class LoginViewModel(
             isLoading = true
             try {
                 val request = signIn(LoginUserRequest(email, password))
-                token = request?.accessToken.toString()
-                userNamer = request?.userName.toString()
+                token = request?.data?.accessToken ?: "TEM COISA ERRADA MERMÃO"
+                userNamer = request?.data?.userName ?: "TEM COISA ERRADA MERMÃO"
 
             } catch (e: Exception) {
                 println("Erro ao realizar login: ${e.message}")
