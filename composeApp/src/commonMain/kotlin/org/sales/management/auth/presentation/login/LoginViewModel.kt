@@ -7,6 +7,8 @@ import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
+import org.sales.management.auth.domain.model.LoginUserRequest
+import org.sales.management.auth.domain.model.LoginUserResponse
 import org.sales.management.auth.domain.repository.AuthRepository
 
 class LoginViewModel(
@@ -18,11 +20,18 @@ class LoginViewModel(
     var userNamer by mutableStateOf("")
     var error by mutableStateOf("")
 
-    suspend fun login(email: String, password: String) {
+    private suspend fun login(loginUserRequest: LoginUserRequest): LoginUserResponse? {
+        return repository.login(loginUserRequest)
+    }
+
+    fun signIn(email: String, password: String) {
         viewModelScope.launch(Dispatchers.Default) {
             isLoading = true
             try {
-                var request = repository.login(email, password)
+                val request = login(email, password)
+                token = request?.accessToken.toString()
+                userNamer = request?.userName.toString()
+
             } catch (e: Exception) {
                 println("Erro ao realizar login: ${e.message}")
             } finally {

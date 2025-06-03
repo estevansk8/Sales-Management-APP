@@ -28,8 +28,7 @@ class AuthService (
             HttpStatusCode.OK -> {
                 response.body()
             }
-
-            else -> throw Exception("Erro ao criar cliente")
+            else -> throw Exception("Erro ao logar")
         }
     }
 
@@ -43,7 +42,7 @@ class AuthService (
                 response.body()
             }
 
-            else -> throw Exception("Erro ao criar cliente")
+            else -> throw Exception("Erro ao criar usuário")
         }
     }
 

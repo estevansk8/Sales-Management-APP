@@ -22,6 +22,10 @@ import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.unit.sp
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.material3.Surface
+import androidx.compose.runtime.getValue
+import androidx.compose.runtime.mutableStateOf
+import androidx.compose.runtime.remember
+import androidx.compose.runtime.setValue
 
 
 import androidx.compose.ui.input.key.Key.Companion.R
@@ -43,6 +47,10 @@ fun LoginScreen(
     onSignUp: () -> Unit,
     viewModel: LoginViewModel = koinViewModel()
 ) {
+
+    var email by remember { mutableStateOf("suzane2@exemplo.com") }
+    var password by remember { mutableStateOf("senhaForte123") }
+
     Column(
         modifier = Modifier
             .fillMaxSize()
@@ -77,8 +85,8 @@ fun LoginScreen(
                 Spacer(modifier = Modifier.height(24.dp))
 
                 OutlinedTextField(
-                    value = "",
-                    onValueChange = {},
+                    value = email,
+                    onValueChange = {email = it},
                     label = { Text("E-mail") },
                     modifier = Modifier.fillMaxWidth()
                 )
@@ -86,8 +94,8 @@ fun LoginScreen(
                 Spacer(modifier = Modifier.height(16.dp))
 
                 OutlinedTextField(
-                    value = "",
-                    onValueChange = {},
+                    value = password,
+                    onValueChange = { password = it },
                     label = { Text("Senha") },
                     modifier = Modifier.fillMaxWidth()
                 )
@@ -95,7 +103,10 @@ fun LoginScreen(
                 Spacer(modifier = Modifier.height(24.dp))
 
                 Button(
-                    onClick = onLogin,
+                    onClick = {
+                        viewModel.login(email, password)
+                    },
+                    enabled = email.isNotBlank() && password.isNotBlank(),
                     modifier = Modifier
                         .fillMaxWidth()
                         .height(48.dp),
