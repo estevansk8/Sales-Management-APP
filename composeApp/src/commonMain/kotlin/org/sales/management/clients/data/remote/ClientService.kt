@@ -12,11 +12,12 @@ import org.sales.management.clients.domain.model.Client
 import org.sales.management.clients.domain.model.ClientRequest
 import org.sales.management.clients.domain.model.ClientDTO
 import org.sales.management.clients.domain.model.ClientsResponse
+import org.sales.management.core.ktor.ApiConstants
 
 class ClientService (
     private val httpClient: HttpClient
 ){
-    private val baseUrl = "http://10.10.0.175:8080/clients"
+    private val baseUrl = "${ApiConstants.BASE_URL}/clients"
 
     suspend fun getClients(): List<Client>? {
         val response : HttpResponse = httpClient.get(baseUrl)
