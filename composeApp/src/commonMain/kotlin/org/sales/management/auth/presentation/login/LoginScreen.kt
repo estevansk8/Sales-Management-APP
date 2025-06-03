@@ -34,11 +34,14 @@ import managementsalesapp.composeapp.generated.resources.Res
 import managementsalesapp.composeapp.generated.resources.compose_multiplatform
 import managementsalesapp.composeapp.generated.resources.login
 import org.jetbrains.compose.resources.painterResource
+import org.koin.compose.viewmodel.koinViewModel
+import org.sales.management.clients.presentation.list.ClientsListViewModel
 
 @Composable
 fun LoginScreen(
     onLogin: () -> Unit,
-    onSignUp: () -> Unit
+    onSignUp: () -> Unit,
+    viewModel: LoginViewModel = koinViewModel()
 ) {
     Column(
         modifier = Modifier
