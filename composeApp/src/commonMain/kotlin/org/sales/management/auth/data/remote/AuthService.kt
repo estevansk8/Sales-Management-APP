@@ -19,19 +19,28 @@ class AuthService (
 ){
     private val baseUrl = "${ApiConstants.BASE_URL}/auth"
 
-    suspend fun login(request: LoginUserRequest): LoginUserResponse? {
-        val response: HttpResponse = httpClient.post("$baseUrl/login") {
-            setBody(request)
-        }
-
-        print("Response status: ${response.status}")
-
-
-        return when (response.status) {
-            HttpStatusCode.OK -> {
-                response.body()
+    suspend fun login(request: LoginUserRequest): LoginUserResponse {
+        try {
+            val response: HttpResponse = httpClient.post("$baseUrl/login") {
+                setBody(request)
             }
-            else -> throw Exception("Erro ao logar")
+            print("Response status: ${response.status}")
+            val loginResponse = response.body<LoginUserResponse>()
+
+            // Caso estranho: Status de erro, mas API diz sucesso.
+            // Poderia lançar uma exceção específica ou retornar uma resposta de erro padronizada.
+            if (response.status != HttpStatusCode.OK && loginResponse.success) {
+                return LoginUserResponse(success = false, message = "Resposta inconsistente da API.", data = null)
+            }
+
+            return loginResponse
+        } catch (e: Exception){
+            println("AuthService - Erro na chamada de login: ${e.message}")
+            return LoginUserResponse(
+                success = false,
+                message = "Erro de comunicação com o servidor: ${e.message ?: "Erro desconhecido"}",
+                data = null
+            )
         }
     }
 

@@ -10,7 +10,7 @@ import org.sales.management.auth.domain.repository.AuthRepository
 class AuthRepositoryImpl(
     private val service: AuthService
 ) : AuthRepository  {
-    override suspend fun login(loginUserRequest: LoginUserRequest): LoginUserResponse? {
+    override suspend fun login(loginUserRequest: LoginUserRequest): LoginUserResponse {
         return service.login(loginUserRequest)
     }
 
