@@ -11,9 +11,17 @@ import androidx.compose.foundation.layout.height
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.layout.size
 import androidx.compose.foundation.shape.RoundedCornerShape
+import androidx.compose.foundation.text.KeyboardActions
+import androidx.compose.foundation.text.KeyboardOptions
+import androidx.compose.material.IconButton
+import androidx.compose.material.icons.Icons
+import androidx.compose.material.icons.filled.Visibility
+import androidx.compose.material.icons.filled.VisibilityOff
 import androidx.compose.material3.Button
 import androidx.compose.material3.ButtonDefaults
 import androidx.compose.material3.CircularProgressIndicator
+import androidx.compose.material3.Icon
+import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.OutlinedTextField
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
@@ -23,6 +31,7 @@ import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.unit.sp
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.material3.Surface
+import androidx.compose.runtime.LaunchedEffect
 import androidx.compose.runtime.getValue
 import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.remember
@@ -30,8 +39,13 @@ import androidx.compose.runtime.setValue
 
 
 import androidx.compose.ui.input.key.Key.Companion.R
+import androidx.compose.ui.platform.LocalFocusManager
 import androidx.compose.ui.text.SpanStyle
 import androidx.compose.ui.text.buildAnnotatedString
+import androidx.compose.ui.text.input.ImeAction
+import androidx.compose.ui.text.input.KeyboardType
+import androidx.compose.ui.text.input.PasswordVisualTransformation
+import androidx.compose.ui.text.input.VisualTransformation
 import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.text.withStyle
 import androidx.compose.ui.unit.dp
@@ -48,9 +62,19 @@ fun LoginScreen(
     onSignUp: () -> Unit,
     viewModel: LoginViewModel = koinViewModel()
 ) {
+    var email = viewModel.emailState
+    var password = viewModel.passwordState
+    var errorMessage = viewModel.errorMessage
+    var isLoading = viewModel.isLoading
 
-    var email by remember { mutableStateOf("suzane2@exemplo.com") }
-    var password by remember { mutableStateOf("senhaForte123") }
+    var passwordVisible by remember { mutableStateOf(false) }
+    val focusManager = LocalFocusManager.current
+
+    LaunchedEffect(Unit) {
+        viewModel.loginSuccessEvent.collect {
+            onLogin()
+        }
+    }
 
     Column(
         modifier = Modifier
@@ -87,7 +111,7 @@ fun LoginScreen(
 
                 OutlinedTextField(
                     value = email,
-                    onValueChange = {email = it},
+                    onValueChange = {viewModel.onEmailChange(it)},
                     label = { Text("E-mail") },
                     modifier = Modifier.fillMaxWidth()
                 )
@@ -96,34 +120,72 @@ fun LoginScreen(
 
                 OutlinedTextField(
                     value = password,
-                    onValueChange = { password = it },
+                    onValueChange = { viewModel.onPasswordChange(it) },
                     label = { Text("Senha") },
-                    modifier = Modifier.fillMaxWidth()
+                    modifier = Modifier.fillMaxWidth(),
+                    visualTransformation = if (passwordVisible) VisualTransformation.None else PasswordVisualTransformation(),
+                    keyboardOptions = KeyboardOptions(
+                        keyboardType = KeyboardType.Password,
+                        imeAction = ImeAction.Done
+                    ),
+                    keyboardActions = KeyboardActions(
+                        onDone = {
+                            focusManager.clearFocus()
+                            viewModel.login()
+                        }
+                    ),
+                    trailingIcon = {
+                        val image = if (passwordVisible)
+                            Icons.Filled.Visibility
+                        else Icons.Filled.VisibilityOff
+                        val description = if (passwordVisible) "Esconder senha" else "Mostrar senha"
+                        IconButton(onClick = { passwordVisible = !passwordVisible }) {
+                            Icon(imageVector = image, description)
+                        }
+                    },
+                    singleLine = true,
+                    isError = errorMessage?.contains("Senha", ignoreCase = true) == true ||
+                            errorMessage?.contains("credenciais", ignoreCase = true) == true
                 )
 
                 Spacer(modifier = Modifier.height(24.dp))
 
+                errorMessage?.let {
+                    Text(
+                        text = it,
+                        color = MaterialTheme.colorScheme.error,
+                        style = MaterialTheme.typography.bodySmall,
+                        textAlign = TextAlign.Center,
+                        modifier = Modifier.fillMaxWidth()
+                    )
+                }
+
                 Button(
                     onClick = {
-                        viewModel.login(email, password)
+                        focusManager.clearFocus() // Remove o foco antes do login
+                        viewModel.login()
                     },
-                    enabled = email.isNotBlank() && password.isNotBlank(),
+                    enabled = !isLoading && email.isNotBlank() && password.isNotBlank(),
                     modifier = Modifier
                         .fillMaxWidth()
                         .height(48.dp),
                     shape = RoundedCornerShape(50),
-                    colors = ButtonDefaults.buttonColors(containerColor = Color(0xFF66A06F))
+                    colors = ButtonDefaults.buttonColors(
+                        containerColor = Color(0xFF66A06F),
+                        disabledContainerColor = Color.Gray
+                    )
                 ) {
-                    if (viewModel.isLoading) {
+                    if (isLoading) {
                         CircularProgressIndicator(
-                            color = Color.White,
+                            color = MaterialTheme.colorScheme.onPrimary,
                             strokeWidth = 2.dp,
                             modifier = Modifier.size(24.dp)
                         )
                     } else {
-                        Text("Login")
+                        Text("Login", color = MaterialTheme.colorScheme.onPrimary)
                     }
                 }
+
                 Text(
                     text = buildAnnotatedString {
                         append("Não tem uma conta? ")

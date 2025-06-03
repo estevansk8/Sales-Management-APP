@@ -10,7 +10,6 @@ import kotlinx.coroutines.flow.MutableSharedFlow
 import kotlinx.coroutines.flow.asSharedFlow
 import kotlinx.coroutines.launch
 import org.sales.management.auth.domain.model.LoginUserRequest
-import org.sales.management.auth.domain.model.LoginUserResponse
 import org.sales.management.auth.domain.repository.AuthRepository
 
 class LoginViewModel(
@@ -18,7 +17,7 @@ class LoginViewModel(
 ) : ViewModel() {
 
     var isLoading by mutableStateOf(false)
-        private set // Somente o ViewModel pode alterar
+        private set
 
     var emailState by mutableStateOf("suzane2@exemplo.com")
     var passwordState by mutableStateOf("senhaForte123")
@@ -65,7 +64,7 @@ class LoginViewModel(
 
                 if (response.success && response.data != null) {
                     token = response.data.accessToken
-                    userName = response.data.userName
+                    userName = response.data.username
                     // TODO: Salvar token/sessão aqui (DataStore, SharedPreferences)
                     _loginSuccessEvent.emit(Unit)
                 } else {

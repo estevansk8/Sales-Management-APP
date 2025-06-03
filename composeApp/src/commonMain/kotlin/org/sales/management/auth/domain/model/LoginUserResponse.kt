@@ -11,7 +11,7 @@ data class LoginUserResponse(
 
 @Serializable
 data class LoginUserData(
-    val userName : String,
+    val username : String,
     val accessToken: String,
     val refreshToken: String
 )
