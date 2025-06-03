@@ -3,6 +3,8 @@ package org.sales.management.core.di
 import org.koin.core.module.dsl.viewModel
 import org.koin.dsl.module
 import org.sales.management.auth.data.remote.AuthService
+import org.sales.management.auth.data.repository.AuthRepositoryImpl
+import org.sales.management.auth.domain.repository.AuthRepository
 import org.sales.management.auth.presentation.login.LoginViewModel
 import org.sales.management.clients.data.remote.ClientService
 import org.sales.management.clients.domain.repository.ClientRepository
@@ -17,6 +19,12 @@ private val dataModule = module {
     single<AuthService>{
         AuthService(
             httpClient = buildHttpClient(getHttpEngine())
+        )
+    }
+
+    single<AuthRepository> {
+        AuthRepositoryImpl(
+            service = get()
         )
     }
 
