@@ -24,6 +24,9 @@ class AuthService (
             setBody(request)
         }
 
+        print("Response status: ${response.status}")
+
+
         return when (response.status) {
             HttpStatusCode.OK -> {
                 response.body()
