@@ -14,7 +14,11 @@ import org.sales.management.core.ktor.getHttpEngine
 
 
 private val dataModule = module {
-
+    single<AuthService>{
+        AuthService(
+            httpClient = buildHttpClient(getHttpEngine())
+        )
+    }
 
     single<ClientService> {
         ClientService(
