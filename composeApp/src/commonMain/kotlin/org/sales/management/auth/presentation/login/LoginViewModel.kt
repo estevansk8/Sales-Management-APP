@@ -20,15 +20,15 @@ class LoginViewModel(
     var userNamer by mutableStateOf("")
     var error by mutableStateOf("")
 
-    private suspend fun login(loginUserRequest: LoginUserRequest): LoginUserResponse? {
+    private suspend fun signIn(loginUserRequest: LoginUserRequest): LoginUserResponse? {
         return repository.login(loginUserRequest)
     }
 
-    fun signIn(email: String, password: String) {
+    fun login(email: String, password: String) {
         viewModelScope.launch(Dispatchers.Default) {
             isLoading = true
             try {
-                val request = login(email, password)
+                val request = signIn(LoginUserRequest(email, password))
                 token = request?.accessToken.toString()
                 userNamer = request?.userName.toString()
 
