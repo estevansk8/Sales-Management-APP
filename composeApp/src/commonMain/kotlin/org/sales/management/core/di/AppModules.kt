@@ -2,6 +2,8 @@ package org.sales.management.core.di
 
 import org.koin.core.module.dsl.viewModel
 import org.koin.dsl.module
+import org.sales.management.auth.data.remote.AuthService
+import org.sales.management.auth.presentation.login.LoginViewModel
 import org.sales.management.clients.data.remote.ClientService
 import org.sales.management.clients.domain.repository.ClientRepository
 import org.sales.management.clients.presentation.list.ClientsListViewModel
@@ -12,6 +14,8 @@ import org.sales.management.core.ktor.getHttpEngine
 
 
 private val dataModule = module {
+
+
     single<ClientService> {
         ClientService(
             httpClient = buildHttpClient(getHttpEngine())
@@ -26,6 +30,12 @@ private val dataModule = module {
 }
 
 private val viewModelModule = module {
+    viewModel{
+        LoginViewModel(
+            repository = get()
+        )
+    }
+
     viewModel {
         ClientsListViewModel(
             repository = get()
