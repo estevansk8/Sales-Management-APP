@@ -6,6 +6,8 @@ import androidx.compose.runtime.setValue
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import kotlinx.coroutines.Dispatchers
+import kotlinx.coroutines.flow.MutableSharedFlow
+import kotlinx.coroutines.flow.asSharedFlow
 import kotlinx.coroutines.launch
 import org.sales.management.auth.domain.model.LoginUserRequest
 import org.sales.management.auth.domain.model.LoginUserResponse
@@ -16,24 +18,62 @@ class LoginViewModel(
 ) : ViewModel() {
 
     var isLoading by mutableStateOf(false)
-    var token by mutableStateOf("")
-    var userNamer by mutableStateOf("")
-    var error by mutableStateOf("")
+        private set // Somente o ViewModel pode alterar
 
-    private suspend fun signIn(loginUserRequest: LoginUserRequest): LoginUserResponse? {
-        return repository.login(loginUserRequest)
+    var emailState by mutableStateOf("suzane2@exemplo.com")
+    var passwordState by mutableStateOf("senhaForte123")
+
+    var errorMessage by mutableStateOf<String?>(null)
+        private set
+
+    private val _loginSuccessEvent = MutableSharedFlow<Unit>()
+    val loginSuccessEvent = _loginSuccessEvent.asSharedFlow()
+
+    var token: String? by mutableStateOf(null)
+        private set
+    var userName: String? by mutableStateOf(null)
+        private set
+
+
+    fun onEmailChange(newEmail: String) {
+        emailState = newEmail
+        clearError()
     }
 
-    fun login(email: String, password: String) {
+    fun onPasswordChange(newPassword: String) {
+        passwordState = newPassword
+        clearError()
+    }
+
+    fun clearError() {
+        errorMessage = null
+    }
+
+
+    fun login() {
+        if (emailState.isBlank() || passwordState.isBlank()) {
+            errorMessage = "E-mail e senha não podem estar vazios."
+            return
+        }
+
         viewModelScope.launch(Dispatchers.Default) {
             isLoading = true
-            try {
-                val request = signIn(LoginUserRequest(email, password))
-                token = request?.data?.accessToken ?: "TEM COISA ERRADA MERMÃO"
-                userNamer = request?.data?.userName ?: "TEM COISA ERRADA MERMÃO"
+            errorMessage = null
 
+            try {
+                val response = repository.login(LoginUserRequest(emailState, passwordState))
+
+                if (response.success && response.data != null) {
+                    token = response.data.accessToken
+                    userName = response.data.userName
+                    // TODO: Salvar token/sessão aqui (DataStore, SharedPreferences)
+                    _loginSuccessEvent.emit(Unit)
+                } else {
+                    errorMessage = response.message.takeIf { it.isNotBlank() } ?: "Erro desconhecido."
+                }
             } catch (e: Exception) {
-                println("Erro ao realizar login: ${e.message}")
+                println("LoginViewModel - Erro ao realizar login: ${e.message}")
+                errorMessage = "Ocorreu um erro inesperado. Tente novamente."
             } finally {
                 isLoading = false
             }
