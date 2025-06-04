@@ -11,8 +11,6 @@ import org.sales.management.core.data.remote.ktor.getHttpEngine
 import org.sales.management.core.navigation.AppNavGraph
 import org.sales.management.core.ui.ManagementSalesTheme
 
-val ktorEngine = ClientService(buildHttpClient(getHttpEngine()))
-
 @Composable
 @Preview
 fun App() {
