@@ -83,6 +83,8 @@ kotlin {
             implementation(libs.koin.compose)
             implementation(libs.koin.compose.viewmodel)
             api(libs.koin.core)
+            api(libs.datastore)
+            api(libs.datastore.preferences)
         }
         nativeMain.dependencies {
             implementation(libs.ktor.client.darwin)

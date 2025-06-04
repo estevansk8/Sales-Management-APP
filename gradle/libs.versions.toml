@@ -50,8 +50,8 @@ kotlinx-serialization-json = { module = "org.jetbrains.kotlinx:kotlinx-serializa
 kotlinx-coroutines-core = { module = "org.jetbrains.kotlinx:kotlinx-coroutines-core", version.ref = "coroutines" }
 kotlinx-coroutines-android = { module = "org.jetbrains.kotlinx:kotlinx-coroutines-android", version.ref = "coroutines" }
 androidx-core-splashscreen = {module = "androidx.core:core-splashscreen", version.ref = "androidx-core-splashscreen" }
-datastores = { module = "androidx.datastore:datastore", version.ref = "datastores" }
-datastores-preferences = { module = "androidx.datastore:datastore-preferences", version.ref = "datastores" }
+datastore = { module = "androidx.datastore:datastore", version.ref = "datastores" }
+datastore-preferences = { module = "androidx.datastore:datastore-preferences", version.ref = "datastores" }
 
 ktor-client-core = { module = "io.ktor:ktor-client-core", version.ref = "ktor" }
 ktor-client-okhttp = { module = "io.ktor:ktor-client-okhttp", version.ref = "ktor" }
