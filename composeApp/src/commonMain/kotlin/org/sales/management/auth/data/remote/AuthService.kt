@@ -12,7 +12,7 @@ import org.sales.management.auth.domain.model.CreateUserResponse
 import org.sales.management.auth.domain.model.LoginUserRequest
 import org.sales.management.auth.domain.model.LoginUserResponse
 import org.sales.management.clients.domain.model.ClientDTO
-import org.sales.management.core.ktor.ApiConstants
+import org.sales.management.core.data.remote.ktor.ApiConstants
 
 class AuthService (
     val httpClient: HttpClient

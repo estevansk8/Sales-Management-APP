@@ -11,8 +11,8 @@ import org.sales.management.clients.domain.repository.ClientRepository
 import org.sales.management.clients.presentation.list.ClientsListViewModel
 import org.sales.management.clients.presentation.form.ClientFormsViewModel
 import org.sales.management.clients.data.repositories.ClientRepositoryImpl
-import org.sales.management.core.ktor.buildHttpClient
-import org.sales.management.core.ktor.getHttpEngine
+import org.sales.management.core.data.remote.ktor.buildHttpClient
+import org.sales.management.core.data.remote.ktor.getHttpEngine
 
 
 private val dataModule = module {
