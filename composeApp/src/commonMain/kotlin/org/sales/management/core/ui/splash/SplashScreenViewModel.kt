@@ -1,4 +1,8 @@
 package org.sales.management.core.ui.splash
 
-class SplashScreenViewModel {
+import androidx.lifecycle.ViewModel
+import org.sales.management.clients.domain.repository.ClientRepository
+
+class SplashScreenViewModel() : ViewModel() {
+
 }

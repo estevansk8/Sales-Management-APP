@@ -13,6 +13,7 @@ import org.sales.management.clients.presentation.form.ClientFormsViewModel
 import org.sales.management.clients.data.repositories.ClientRepositoryImpl
 import org.sales.management.core.data.remote.ktor.buildHttpClient
 import org.sales.management.core.data.remote.ktor.getHttpEngine
+import org.sales.management.core.ui.splash.SplashScreenViewModel
 
 
 private val dataModule = module {
@@ -42,6 +43,10 @@ private val dataModule = module {
 }
 
 private val viewModelModule = module {
+    viewModel {
+        SplashScreenViewModel()
+    }
+
     viewModel{
         LoginViewModel(
             repository = get()
