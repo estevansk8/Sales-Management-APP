@@ -12,7 +12,7 @@ import org.sales.management.home.presentation.HomeScreen
 
 
 @Composable
-fun AppNavGraph(
+fun NavHost(
     navController: NavHostController,
 ) {
 //    val commonTypeMap = mapOf(typeOf<InstructorDto>() to CustomNavTypes.InstructorType)

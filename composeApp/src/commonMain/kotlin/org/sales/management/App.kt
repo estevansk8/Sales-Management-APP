@@ -5,10 +5,7 @@ import androidx.compose.material3.MaterialTheme
 import androidx.compose.runtime.*
 import androidx.navigation.compose.rememberNavController
 import org.jetbrains.compose.ui.tooling.preview.Preview
-import org.sales.management.clients.data.remote.ClientService
-import org.sales.management.core.data.remote.ktor.buildHttpClient
-import org.sales.management.core.data.remote.ktor.getHttpEngine
-import org.sales.management.core.navigation.AppNavGraph
+import org.sales.management.core.navigation.NavHost
 import org.sales.management.core.ui.ManagementSalesTheme
 
 @Composable
@@ -18,7 +15,7 @@ fun App() {
         val navController = rememberNavController()
 
         Surface(color = MaterialTheme.colorScheme.onPrimary) {
-            AppNavGraph(navController = navController)
+            NavHost(navController = navController)
         }
     }
 }
