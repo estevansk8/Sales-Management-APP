@@ -1,4 +1,4 @@
-package org.sales.management.core.ui
+package org.sales.management.core.ui.itens
 
 import androidx.compose.foundation.background
 import androidx.compose.foundation.clickable
