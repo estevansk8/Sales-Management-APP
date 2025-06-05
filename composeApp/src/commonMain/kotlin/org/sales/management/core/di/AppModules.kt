@@ -15,6 +15,7 @@ import org.sales.management.core.data.local.datastore.preferenceModule
 import org.sales.management.core.data.remote.ktor.buildHttpClient
 import org.sales.management.core.data.remote.ktor.getHttpEngine
 import org.sales.management.core.ui.splash.SplashScreenViewModel
+import org.sales.management.home.presentation.HomeViewModel
 
 
 private val dataModule = module {
@@ -54,6 +55,12 @@ private val viewModelModule = module {
         LoginViewModel(
             dataStore = get(),
             repository = get()
+        )
+    }
+
+    viewModel {
+        HomeViewModel(
+            dataStore = get()
         )
     }
 

@@ -47,6 +47,7 @@ import org.sales.management.home.domain.Feature
 @Composable
 fun HomeScreen(
     goToClients : () -> Unit,
+
 ){
     val listofFeatures = listOf(
         Feature(Icons.Default.People,"Clientes", goToClients),
