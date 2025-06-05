@@ -5,6 +5,10 @@ import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.setValue
 import androidx.datastore.core.DataStore
 import androidx.datastore.preferences.core.Preferences
+import androidx.datastore.preferences.core.booleanPreferencesKey
+import androidx.datastore.preferences.core.edit
+import androidx.datastore.preferences.core.stringPreferencesKey
+import androidx.datastore.preferences.core.stringSetPreferencesKey
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import kotlinx.coroutines.Dispatchers
@@ -68,7 +72,13 @@ class LoginViewModel(
                 if (response.success && response.data != null) {
                     token = response.data.accessToken
                     userName = response.data.username
-                    // TODO: Salvar token/sessão aqui (DataStore, SharedPreferences)
+
+                    dataStore.edit {
+                        it[booleanPreferencesKey("isLogged")] = true
+                        it[stringPreferencesKey("token")] = token!!
+                        it[stringPreferencesKey("username")] = userName!!
+                    }
+
                     _loginSuccessEvent.emit(Unit)
                 } else {
                     errorMessage = response.message.takeIf { it.isNotBlank() } ?: "Erro desconhecido."

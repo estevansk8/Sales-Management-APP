@@ -6,6 +6,7 @@ import androidx.compose.runtime.setValue
 import androidx.datastore.core.DataStore
 import androidx.datastore.preferences.core.Preferences
 import androidx.datastore.preferences.core.booleanPreferencesKey
+import androidx.datastore.preferences.core.stringPreferencesKey
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import kotlinx.coroutines.flow.first
@@ -21,8 +22,21 @@ class SplashScreenViewModel(
 
     init {
         viewModelScope.launch {
-            val isLogged = booleanPreferencesKey("isLogged")
+            val isLoggedKey = booleanPreferencesKey("isLogged")
+            val tokenKey = stringPreferencesKey("token")
+            val userKey = stringPreferencesKey("userName")
+
             val prefs = dataStore.data.first()
+
+            val isLoggedVal = prefs[isLoggedKey] ?: false
+            val token = prefs[tokenKey]
+            val user = prefs[userKey]
+
+            println("🌐 isLogged = $isLoggedVal")
+            println("🔑 token = $token")
+            println("👤 userName = $user")
+
+            val isLogged = booleanPreferencesKey("isLogged")
             isLoggedIn = prefs[isLogged] ?: false
         }
     }
