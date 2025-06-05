@@ -54,8 +54,10 @@ fun NavHost(
                 goToClients = {
                     navController.navigate(ClientsListScreen)
                 },
-                goToLogin = {
-                    navController.navigate(LoginScreen)
+                onExit = {
+                    navController.navigate(LoginScreen){
+                        popUpTo(LoginScreen) { inclusive = true }
+                    }
                 }
             )
         }

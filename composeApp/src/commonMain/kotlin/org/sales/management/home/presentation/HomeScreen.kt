@@ -52,7 +52,7 @@ import org.sales.management.home.domain.Feature
 @Composable
 fun HomeScreen(
     goToClients : () -> Unit,
-    goToLogin: () -> Unit,
+    onExit: () -> Unit,
     viewModel: HomeViewModel = koinViewModel()
 ){
     val userName = viewModel.userName
