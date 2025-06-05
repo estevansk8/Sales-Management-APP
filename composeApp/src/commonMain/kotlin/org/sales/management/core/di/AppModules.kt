@@ -45,11 +45,14 @@ private val dataModule = module {
 
 private val viewModelModule = module {
     viewModel {
-        SplashScreenViewModel(get())
+        SplashScreenViewModel(
+            dataStore = get()
+        )
     }
 
     viewModel{
         LoginViewModel(
+            dataStore = get(),
             repository = get()
         )
     }

@@ -3,6 +3,8 @@ package org.sales.management.auth.presentation.login
 import androidx.compose.runtime.getValue
 import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.setValue
+import androidx.datastore.core.DataStore
+import androidx.datastore.preferences.core.Preferences
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import kotlinx.coroutines.Dispatchers
@@ -13,6 +15,7 @@ import org.sales.management.auth.domain.model.LoginUserRequest
 import org.sales.management.auth.domain.repository.AuthRepository
 
 class LoginViewModel(
+    private val dataStore: DataStore<Preferences>,
     private val repository: AuthRepository
 ) : ViewModel() {
 
