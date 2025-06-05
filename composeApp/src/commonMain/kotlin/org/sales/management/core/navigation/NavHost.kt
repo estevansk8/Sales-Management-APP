@@ -8,6 +8,7 @@ import org.sales.management.auth.presentation.login.LoginScreen
 import org.sales.management.auth.presentation.create.CreateUserScreen
 import org.sales.management.clients.presentation.list.ClientsListScreen
 import org.sales.management.clients.presentation.form.ClientFormsScreen
+import org.sales.management.core.ui.splash.SplashScreen
 import org.sales.management.home.presentation.HomeScreen
 
 
@@ -18,9 +19,19 @@ fun NavHost(
 //    val commonTypeMap = mapOf(typeOf<InstructorDto>() to CustomNavTypes.InstructorType)
     NavHost(
         navController = navController,
-        startDestination = LoginScreen,
+        startDestination = SplashScreen,
     ) {
 
+        composable<SplashScreen>{
+            SplashScreen(
+                goToLogin = {
+                    navController.navigate(LoginScreen)
+                },
+                goToHome = {
+                    navController.navigate(HomeScreen)
+                }
+            )
+        }
         composable<LoginScreen>{
             LoginScreen(
                 onLogin = {
