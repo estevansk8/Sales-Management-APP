@@ -72,7 +72,6 @@ private val viewModelModule = module {
 
     viewModel {
         ClientsListViewModel(
-            dataStore = get(),
             repository = get()
         )
     }

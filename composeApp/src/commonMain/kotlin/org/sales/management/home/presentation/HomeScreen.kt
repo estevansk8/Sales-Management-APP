@@ -150,7 +150,7 @@ fun HomeScreen(
                                 onClick = {
                                     viewModel.logout()
                                     showMenu = false
-                                    goToLogin()
+                                    onExit()
                                 }
                             )
                         }

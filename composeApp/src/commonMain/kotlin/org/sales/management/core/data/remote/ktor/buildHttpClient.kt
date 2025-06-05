@@ -58,11 +58,15 @@ fun buildHttpClient(
                 loadTokens {
                     val tokenKey = stringPreferencesKey("token")
 
+                    // .map para transformar o Flow<Preferences> em Flow<String?>
+                    // e .first() para obter o valor mais recente.
                     val tokenValue = dataStore.data
                         .map { preferences ->
                             preferences[tokenKey]
                         }
                         .first()
+
+                    println("TokenValue: $tokenValue")
 
                     if (!tokenValue.isNullOrBlank()) {
                         BearerTokens(tokenValue, "")
@@ -74,7 +78,7 @@ fun buildHttpClient(
                 // TODO: Lógica para atualizar o token se a API retornar 401 (Unauthorized)
                 refreshTokens {
                     // Chamar API de refresh token e atualizar com o novo token.
-                    // Exemplo básico:
+
                     // val newTokens = apiClient.refreshToken(oldTokens.refreshToken)
                     // dataStore.edit { prefs -> prefs[tokenKey] = newTokens.accessToken }
                     // BearerTokens(newTokens.accessToken, newTokens.refreshToken)

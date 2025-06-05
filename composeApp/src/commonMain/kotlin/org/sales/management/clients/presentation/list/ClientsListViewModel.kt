@@ -14,7 +14,6 @@ import org.sales.management.clients.domain.repository.ClientRepository
 import org.sales.management.clients.domain.model.Client
 
 class ClientsListViewModel(
-    private val dataStore: DataStore<Preferences>,
     private val repository: ClientRepository
 ) : ViewModel() {
 
