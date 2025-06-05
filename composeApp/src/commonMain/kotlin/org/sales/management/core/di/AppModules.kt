@@ -44,7 +44,7 @@ private val dataModule = module {
 
 private val viewModelModule = module {
     viewModel {
-        SplashScreenViewModel()
+        SplashScreenViewModel(get())
     }
 
     viewModel{
