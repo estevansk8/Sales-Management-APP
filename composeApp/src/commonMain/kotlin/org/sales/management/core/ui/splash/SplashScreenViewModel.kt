@@ -24,7 +24,7 @@ class SplashScreenViewModel(
         viewModelScope.launch {
             val isLoggedKey = booleanPreferencesKey("isLogged")
             val tokenKey = stringPreferencesKey("token")
-            val userKey = stringPreferencesKey("userName")
+            val userKey = stringPreferencesKey("username")
 
             val prefs = dataStore.data.first()
 
