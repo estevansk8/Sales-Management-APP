@@ -1,8 +1,7 @@
-package org.sales.management.core.data.local
+package org.sales.management.core.data.local.datastore
 
 import androidx.datastore.core.DataStore
 import androidx.datastore.preferences.core.Preferences
-import platform.Foundation.NSURL
 
 
 fun createDataStore(): DataStore<Preferences> = createDataStore(
