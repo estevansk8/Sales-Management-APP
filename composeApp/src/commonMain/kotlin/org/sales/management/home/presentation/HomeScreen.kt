@@ -40,6 +40,7 @@ import androidx.compose.runtime.setValue
 import androidx.compose.ui.draw.clip
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.unit.sp
+import org.koin.compose.viewmodel.koinViewModel
 import org.sales.management.core.ui.itens.CustomBottomBar
 import org.sales.management.home.domain.Feature
 
@@ -47,7 +48,7 @@ import org.sales.management.home.domain.Feature
 @Composable
 fun HomeScreen(
     goToClients : () -> Unit,
-
+    viewModel: HomeViewModel = koinViewModel()
 ){
     val listofFeatures = listOf(
         Feature(Icons.Default.People,"Clientes", goToClients),
