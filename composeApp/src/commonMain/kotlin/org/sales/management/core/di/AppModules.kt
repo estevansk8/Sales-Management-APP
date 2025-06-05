@@ -21,7 +21,10 @@ import org.sales.management.home.presentation.HomeViewModel
 private val dataModule = module {
     single<AuthService>{
         AuthService(
-            httpClient = buildHttpClient(getHttpEngine())
+            httpClient = buildHttpClient(
+                dataStore = get(),
+                engine = getHttpEngine()
+            )
         )
     }
 
@@ -33,7 +36,10 @@ private val dataModule = module {
 
     single<ClientService> {
         ClientService(
-            httpClient = buildHttpClient(getHttpEngine())
+            httpClient = buildHttpClient(
+                dataStore = get(),
+                engine = getHttpEngine()
+            )
         )
     }
 
