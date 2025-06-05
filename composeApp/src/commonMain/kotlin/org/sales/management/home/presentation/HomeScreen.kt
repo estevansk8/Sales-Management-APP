@@ -15,6 +15,7 @@ import androidx.compose.foundation.layout.size
 import androidx.compose.foundation.layout.width
 import androidx.compose.foundation.rememberScrollState
 import androidx.compose.foundation.shape.CircleShape
+import androidx.compose.material.Divider
 import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.filled.CalendarMonth
 import androidx.compose.material.icons.filled.Inventory2
@@ -23,7 +24,10 @@ import androidx.compose.material.icons.filled.Notifications
 import androidx.compose.material.icons.filled.People
 import androidx.compose.material.icons.filled.Person
 import androidx.compose.material.icons.filled.ShoppingCart
+import androidx.compose.material3.DropdownMenu
+import androidx.compose.material3.DropdownMenuItem
 import androidx.compose.material3.Icon
+import androidx.compose.material3.IconButton
 import androidx.compose.material3.Scaffold
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Alignment
@@ -48,16 +52,19 @@ import org.sales.management.home.domain.Feature
 @Composable
 fun HomeScreen(
     goToClients : () -> Unit,
+    goToLogin: () -> Unit,
     viewModel: HomeViewModel = koinViewModel()
 ){
+    val userName = viewModel.userName
+    var showMenu by remember { mutableStateOf(false) }
+    var selectedTab by remember { mutableStateOf(0) }
+
     val listofFeatures = listOf(
         Feature(Icons.Default.People,"Clientes", goToClients),
         Feature(Icons.Default.Inventory2,"Produtos", {  }),
         Feature(Icons.Default.ShoppingCart,"Vendas", {  }),
         Feature(Icons.Default.Money,"Gastos", {  }),
     )
-
-    var selectedTab by remember { mutableStateOf(0) }
 
     Scaffold(
         bottomBar = {
@@ -85,7 +92,7 @@ fun HomeScreen(
                     verticalAlignment = Alignment.CenterVertically
                 ) {
                     Text(
-                        text = "Olá\nEstevan!",
+                        text = "Olá\n$userName!",
                         fontSize = 24.sp,
                         modifier = Modifier.weight(1f)
                     )
@@ -112,13 +119,43 @@ fun HomeScreen(
                             .clip(CircleShape)
                             .background(Color.Gray)
                     ){
-                        Icon(
-                            imageVector = Icons.Default.Person,
-                            contentDescription = "Perfil",
-                            tint = Color.White,
-                            modifier = Modifier.padding(8.dp).align(Alignment.Center)
-                        )
+                        IconButton(onClick = { showMenu = !showMenu }) {
+                            Icon(
+                                imageVector = Icons.Default.Person,
+                                contentDescription = "Perfil",
+                                tint = Color.White,
+                                modifier = Modifier
+                                    .size(40.dp)
+                                    .background(Color.Gray, CircleShape)
+                                    .padding(8.dp)
+                            )
+                        }
+
+                        DropdownMenu(
+                            expanded = showMenu,
+                            onDismissRequest = { showMenu = false }
+                        ) {
+                            DropdownMenuItem(
+                                text = { Text("Editar perfil") },
+                                onClick = {
+                                    /*TODO: Navegar para tela de edição */
+                                    showMenu = false
+                                }
+                            )
+
+                            Divider(modifier = Modifier.padding(vertical = 4.dp).height(2.dp))
+
+                            DropdownMenuItem(
+                                text = { Text("Sair") },
+                                onClick = {
+                                    viewModel.logout()
+                                    showMenu = false
+                                    goToLogin()
+                                }
+                            )
+                        }
                     }
+
                 }
 
                 Spacer(modifier = Modifier.height(8.dp))

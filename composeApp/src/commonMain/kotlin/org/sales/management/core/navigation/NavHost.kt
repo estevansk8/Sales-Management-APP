@@ -53,6 +53,9 @@ fun NavHost(
             HomeScreen(
                 goToClients = {
                     navController.navigate(ClientsListScreen)
+                },
+                goToLogin = {
+                    navController.navigate(LoginScreen)
                 }
             )
         }

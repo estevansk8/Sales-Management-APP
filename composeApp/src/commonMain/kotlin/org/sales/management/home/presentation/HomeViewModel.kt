@@ -22,7 +22,7 @@ class HomeViewModel(
 
     init {
         viewModelScope.launch {
-            val userKey = stringPreferencesKey("userName")
+            val userKey = stringPreferencesKey("username")
             val prefs = dataStore.data.first()
             userName = prefs[userKey] ?: "Empreendedor"
         }
@@ -32,7 +32,7 @@ class HomeViewModel(
         viewModelScope.launch {
             val tokenKey = stringPreferencesKey("token")
             val isLoggedKey = booleanPreferencesKey("isLogged")
-            val userKey = stringPreferencesKey("userName")
+            val userKey = stringPreferencesKey("username")
 
             dataStore.edit {
                 it.remove(tokenKey)
