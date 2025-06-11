@@ -16,6 +16,8 @@ import org.sales.management.core.data.remote.ktor.buildHttpClient
 import org.sales.management.core.data.remote.ktor.getHttpEngine
 import org.sales.management.core.ui.splash.SplashScreenViewModel
 import org.sales.management.home.presentation.HomeViewModel
+import org.sales.management.products.data.remote.ProductService
+import org.sales.management.products.presentation.list.ProductsListViewModel
 
 
 private val dataModule = module {
@@ -48,6 +50,8 @@ private val dataModule = module {
             service = get()
         )
     }
+
+
 }
 
 private val viewModelModule = module {
@@ -78,6 +82,12 @@ private val viewModelModule = module {
 
     viewModel {
         ClientFormsViewModel(
+            repository = get()
+        )
+    }
+
+    viewModel {
+        ProductsListViewModel(
             repository = get()
         )
     }
