@@ -51,6 +51,14 @@ private val dataModule = module {
         )
     }
 
+    single<ProductService> {
+        ProductService(
+            httpClient = buildHttpClient(
+                dataStore = get(),
+                engine = getHttpEngine()
+            )
+        )
+    }
 
 }
 
