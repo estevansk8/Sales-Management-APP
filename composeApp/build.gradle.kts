@@ -79,6 +79,7 @@ kotlin {
             implementation(libs.ktor.client.core)
             implementation(libs.bundles.ktor)
             implementation (libs.androidx.material)
+            implementation(libs.bignum)
 
             implementation(libs.koin.compose)
             implementation(libs.koin.compose.viewmodel)
