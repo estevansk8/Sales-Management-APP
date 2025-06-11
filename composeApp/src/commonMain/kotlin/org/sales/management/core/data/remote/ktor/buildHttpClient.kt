@@ -66,8 +66,6 @@ fun buildHttpClient(
                         }
                         .first()
 
-                    println("TokenValue: $tokenValue")
-
                     if (!tokenValue.isNullOrBlank()) {
                         BearerTokens(tokenValue, "")
                     } else {
