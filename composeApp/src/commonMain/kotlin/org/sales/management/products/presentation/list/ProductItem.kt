@@ -49,8 +49,16 @@ fun ProductItem(product: Product) {
         Spacer(modifier = Modifier.width(12.dp))
 
         Text(
+            modifier = Modifier.weight(1f),
             text = product.name,
             style = MaterialTheme.typography.bodyLarge.copy(fontWeight = FontWeight.Medium)
         )
+
+        Text(
+            text = "R$: ${product.price}",
+            style = MaterialTheme.typography.bodyLarge.copy(fontWeight = FontWeight.Medium)
+        )
+
+
     }
 }
