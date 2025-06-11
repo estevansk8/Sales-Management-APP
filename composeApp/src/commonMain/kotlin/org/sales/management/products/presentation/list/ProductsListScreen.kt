@@ -34,7 +34,7 @@ fun ProductsListScreen(
 
     LaunchedEffect(Unit) {
         viewModel.listProducts()
-        println(clients)
+        println(products)
     }
 
     Scaffold(
@@ -77,7 +77,7 @@ fun ProductsListScreen(
                     .padding(16.dp)
             ) {
                 items(products) { product ->
-                    ClientItem(product)
+                    ProductItem(product)
                     Divider(modifier = Modifier.padding(vertical = 8.dp))
                 }
             }

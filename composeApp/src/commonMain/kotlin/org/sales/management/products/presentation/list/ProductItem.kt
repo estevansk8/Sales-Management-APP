@@ -18,7 +18,7 @@ import androidx.compose.ui.draw.clip
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.unit.dp
-import org.sales.management.clients.domain.model.Client
+import org.sales.management.products.domain.model.Product
 
 @Composable
 fun ProductItem(product: Product) {
@@ -28,7 +28,7 @@ fun ProductItem(product: Product) {
             .fillMaxWidth()
             .padding(4.dp)
     ) {
-        val initial = client.name.firstOrNull()?.uppercase() ?: "#"
+        val initial = product.name.firstOrNull()?.uppercase() ?: "#"
 
         Box(
             contentAlignment = Alignment.Center,
@@ -49,7 +49,7 @@ fun ProductItem(product: Product) {
         Spacer(modifier = Modifier.width(12.dp))
 
         Text(
-            text = client.name,
+            text = product.name,
             style = MaterialTheme.typography.bodyLarge.copy(fontWeight = FontWeight.Medium)
         )
     }
