@@ -17,6 +17,8 @@ import org.sales.management.core.data.remote.ktor.getHttpEngine
 import org.sales.management.core.ui.splash.SplashScreenViewModel
 import org.sales.management.home.presentation.HomeViewModel
 import org.sales.management.products.data.remote.ProductService
+import org.sales.management.products.data.repositories.ProductMockRepositoryImpl
+import org.sales.management.products.domain.repository.ProductRepository
 import org.sales.management.products.presentation.list.ProductsListViewModel
 
 
@@ -57,6 +59,12 @@ private val dataModule = module {
                 dataStore = get(),
                 engine = getHttpEngine()
             )
+        )
+    }
+
+    single<ProductRepository> {
+        ProductMockRepositoryImpl(
+            service = get()
         )
     }
 
