@@ -10,6 +10,7 @@ import org.sales.management.clients.presentation.list.ClientsListScreen
 import org.sales.management.clients.presentation.form.ClientFormsScreen
 import org.sales.management.core.ui.splash.SplashScreen
 import org.sales.management.home.presentation.HomeScreen
+import org.sales.management.products.presentation.list.ProductsListScreen
 
 
 @Composable
@@ -54,6 +55,9 @@ fun NavHost(
                 goToClients = {
                     navController.navigate(ClientsListScreen)
                 },
+                goToProducts = {
+                    navController.navigate(ProductsListScreen)
+                },
                 onExit = {
                     navController.navigate(LoginScreen){
                         popUpTo(LoginScreen) { inclusive = true }
@@ -70,6 +74,13 @@ fun NavHost(
         }
         composable<ClientsFormScreen>{
             ClientFormsScreen()
+        }
+        composable<ProductsListScreen>{
+            ProductsListScreen(
+                goToProductForm = {
+                    navController.navigate(ProductsFormScreen)
+                }
+            )
         }
     }
 }

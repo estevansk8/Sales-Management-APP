@@ -52,6 +52,7 @@ import org.sales.management.home.domain.Feature
 @Composable
 fun HomeScreen(
     goToClients : () -> Unit,
+    goToProducts : () -> Unit,
     onExit: () -> Unit,
     viewModel: HomeViewModel = koinViewModel()
 ){
@@ -61,7 +62,7 @@ fun HomeScreen(
 
     val listofFeatures = listOf(
         Feature(Icons.Default.People,"Clientes", goToClients),
-        Feature(Icons.Default.Inventory2,"Produtos", {  }),
+        Feature(Icons.Default.Inventory2,"Produtos", goToProducts),
         Feature(Icons.Default.ShoppingCart,"Vendas", {  }),
         Feature(Icons.Default.Money,"Gastos", {  }),
     )

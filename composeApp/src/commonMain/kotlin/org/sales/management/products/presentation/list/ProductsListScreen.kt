@@ -26,7 +26,7 @@ import org.sales.management.clients.presentation.list.ClientsListViewModel
 
 @Composable
 fun ProductsListScreen(
-    goToClientForm: () -> Unit,
+    goToProductForm: () -> Unit,
     viewModel: ProductsListViewModel = koinViewModel()
 ) {
     val products = viewModel.products
@@ -42,7 +42,7 @@ fun ProductsListScreen(
             FloatingActionButton(
                 backgroundColor = MaterialTheme.colorScheme.primary,
                 onClick = {
-                    goToClientForm()
+                    goToProductForm()
                 }
             ) {
                 Icon(
