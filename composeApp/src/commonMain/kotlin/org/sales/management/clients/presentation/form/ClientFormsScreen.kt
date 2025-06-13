@@ -24,8 +24,8 @@ import androidx.compose.material3.SnackbarHost
 import androidx.compose.material3.SnackbarHostState
 import androidx.compose.runtime.LaunchedEffect
 import androidx.compose.ui.text.input.KeyboardType
-import org.sales.management.core.ui.itens.TopBar
-import org.sales.management.core.ui.itens.FormsButton
+import org.sales.management.core.ui.composables.TopBar
+import org.sales.management.core.ui.composables.FormsButton
 
 
 @Composable

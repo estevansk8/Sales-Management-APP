@@ -21,7 +21,7 @@ import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.unit.dp
 import org.koin.compose.viewmodel.koinViewModel
-import org.sales.management.core.ui.itens.TopBar
+import org.sales.management.core.ui.composables.TopBar
 
 @Composable
 fun ClientsListScreen(

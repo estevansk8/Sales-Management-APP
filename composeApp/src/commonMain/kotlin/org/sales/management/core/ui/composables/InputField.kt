@@ -1,4 +1,4 @@
-package org.sales.management.core.ui.itens
+package org.sales.management.core.ui.composables
 
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.fillMaxWidth

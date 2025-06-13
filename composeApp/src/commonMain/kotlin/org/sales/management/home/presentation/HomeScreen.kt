@@ -45,7 +45,7 @@ import androidx.compose.ui.draw.clip
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.unit.sp
 import org.koin.compose.viewmodel.koinViewModel
-import org.sales.management.core.ui.itens.BottomBar
+import org.sales.management.core.ui.composables.BottomBar
 import org.sales.management.home.domain.Feature
 
 
