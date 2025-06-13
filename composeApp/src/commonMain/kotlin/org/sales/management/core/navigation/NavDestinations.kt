@@ -25,3 +25,9 @@ object ProductsListScreen
 
 @Serializable
 object ProductsFormScreen
+
+@Serializable
+object SaleFormScreen
+
+@Serializable
+object SaleListScreen
