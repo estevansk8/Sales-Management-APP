@@ -32,24 +32,25 @@ fun InputField(
             text = label,
             fontWeight = FontWeight.Bold,
             fontSize = 16.sp,
+            color = Color.Black,
             modifier = Modifier.padding(start = 4.dp)
         )
 
         TextField(
             modifier = Modifier
                 .fillMaxWidth()
-                .height(56.dp),
+                .height(52.dp),
             value = value,
             onValueChange = { onValueChange(it) },
             colors = TextFieldDefaults.colors(
                 focusedTextColor = Color.Black,
                 unfocusedTextColor = Color.Black,
-                focusedContainerColor = Color.LightGray,
-                unfocusedContainerColor = Color.LightGray,
+                focusedContainerColor = Color.White,
+                unfocusedContainerColor = Color.White,
                 focusedIndicatorColor = Color.Transparent,
                 unfocusedIndicatorColor = Color.Transparent,
             ),
-            shape = RoundedCornerShape(12.dp),
+            shape = RoundedCornerShape(4.dp),
             singleLine = true,
             keyboardOptions = KeyboardOptions(keyboardType = keyboardType)
         )
