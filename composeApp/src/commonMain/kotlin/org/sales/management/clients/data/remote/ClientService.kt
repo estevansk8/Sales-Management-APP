@@ -39,11 +39,10 @@ class ClientService (
         }
 
         return when (response.status) {
-            HttpStatusCode.OK -> {
-                response.body()
-            }
+            HttpStatusCode.OK,
+            HttpStatusCode.Created->  response.body()
 
-            else -> throw Exception("Erro ao criar cliente")
+            else -> throw Exception("${response.status}")
         }
     }
 

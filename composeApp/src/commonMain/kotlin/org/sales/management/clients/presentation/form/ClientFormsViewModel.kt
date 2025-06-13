@@ -37,6 +37,7 @@ class ClientFormsViewModel(
                 _eventFlow.emit("Cliente criado com sucesso!")
             } catch (e: Exception) {
                 println(e)
+                _eventFlow.emit("Erro ao criar cliente: ${e.message}")
             } finally {
                 isLoading = false
             }
