@@ -1,5 +1,7 @@
 package org.sales.management.clients.presentation.form
 
+import androidx.compose.foundation.Image
+import androidx.compose.foundation.background
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.padding
@@ -18,16 +20,23 @@ import androidx.compose.runtime.setValue
 import androidx.compose.runtime.getValue
 import androidx.compose.runtime.mutableStateOf
 import androidx.compose.foundation.layout.Arrangement
+import androidx.compose.foundation.layout.size
+import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.foundation.text.KeyboardOptions
 import androidx.compose.material3.OutlinedTextField
 import androidx.compose.material3.Snackbar
 import androidx.compose.material3.SnackbarHost
 import androidx.compose.material3.SnackbarHostState
+import androidx.compose.material3.Surface
 import androidx.compose.runtime.LaunchedEffect
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.text.input.KeyboardType
+import managementsalesapp.composeapp.generated.resources.Res
+import managementsalesapp.composeapp.generated.resources.login
+import org.jetbrains.compose.resources.painterResource
 import org.sales.management.core.ui.composables.TopBar
 import org.sales.management.core.ui.composables.FormsButton
+import org.sales.management.core.ui.composables.InputField
 
 
 @Composable
@@ -65,49 +74,92 @@ fun ClientFormsScreen(
             }
         }
     ) { padding ->
+
         Column(
             modifier = Modifier
                 .fillMaxSize()
-                .padding(padding)
-                .padding(16.dp),
-            verticalArrangement = Arrangement.Center,
+                .background(Color.White)
+                .padding(horizontal = 16.dp),
             horizontalAlignment = Alignment.CenterHorizontally
         ) {
 
-
-            OutlinedTextField(
-                value = name,
-                onValueChange = { name = it },
-                label = { Text("Nome") },
-                modifier = Modifier.fillMaxWidth().padding(horizontal = 12.dp),
-                keyboardOptions = KeyboardOptions(keyboardType = KeyboardType.Text)
+            Image(
+                painter = painterResource(Res.drawable.login),
+                contentDescription = null,
+                modifier = Modifier.size(300.dp)
             )
 
-            OutlinedTextField(
-                value = phone,
-                onValueChange = { phone = it },
-                label = { Text("Telefone") },
-                modifier = Modifier.fillMaxWidth().padding(horizontal = 12.dp),
-                keyboardOptions = KeyboardOptions(keyboardType = KeyboardType.Phone)
-            )
+            Surface(
+                shape = RoundedCornerShape(topStart = 32.dp, topEnd = 32.dp),
+                color = Color.LightGray,
+                modifier = Modifier.fillMaxSize()
+            ) {
+                Column(
+                    modifier = Modifier
+                        .fillMaxSize()
+                        .padding(padding)
+                        .padding(16.dp),
+                    verticalArrangement = Arrangement.Center,
+                    horizontalAlignment = Alignment.CenterHorizontally
+                ) {
 
-            OutlinedTextField(
-                value = address,
-                onValueChange = { address = it },
-                label = { Text("Endereço") },
-                modifier = Modifier.fillMaxWidth().padding(horizontal = 12.dp),
-                keyboardOptions = KeyboardOptions(keyboardType = KeyboardType.Text)
-            )
 
-            Spacer(modifier = Modifier.height(16.dp))
+                    InputField(
+                        label = "Nome",
+                        value = name,
+                        onValueChange = { name = it },
+                        keyboardType = KeyboardType.Text
+                    )
+//                    OutlinedTextField(
+//                        value = name,
+//                        onValueChange = { name = it },
+//                        label = { Text("Nome") },
+//                        modifier = Modifier.fillMaxWidth().padding(horizontal = 12.dp),
+//                        keyboardOptions = KeyboardOptions(keyboardType = KeyboardType.Text)
+//                    )
 
-            FormsButton(
-                text = "Cadastrar",
-                onClick = {
-                    viewModel.saveClient(name, phone, address)
+                    InputField(
+                        label = "Telefone",
+                        value = phone,
+                        onValueChange = { phone = it },
+                        keyboardType = KeyboardType.Phone
+                    )
+
+//                    OutlinedTextField(
+//                        value = phone,
+//                        onValueChange = { phone = it },
+//                        label = { Text("Telefone") },
+//                        modifier = Modifier.fillMaxWidth().padding(horizontal = 12.dp),
+//                        keyboardOptions = KeyboardOptions(keyboardType = KeyboardType.Phone)
+//                    )
+
+                    InputField(
+                        label = "Endereço",
+                        value = address,
+                        onValueChange = { address = it },
+                        keyboardType = KeyboardType.Text
+                    )
+
+//                    OutlinedTextField(
+//                        value = address,
+//                        onValueChange = { address = it },
+//                        label = { Text("Endereço") },
+//                        modifier = Modifier.fillMaxWidth().padding(horizontal = 12.dp),
+//                        keyboardOptions = KeyboardOptions(keyboardType = KeyboardType.Text)
+//                    )
+
+                    Spacer(modifier = Modifier.height(16.dp))
+
+                    FormsButton(
+                        text = "Cadastrar",
+                        onClick = {
+                            viewModel.saveClient(name, phone, address)
+                        }
+                    )
+
                 }
-            )
-
+            }
         }
+
     }
 }
