@@ -3,6 +3,7 @@ package org.sales.management.products.presentation.list
 import androidx.compose.foundation.background
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Row
+import androidx.compose.foundation.layout.Spacer
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.padding
 import androidx.compose.material.MaterialTheme
@@ -23,6 +24,7 @@ fun ProductListHeader(){
         horizontalArrangement = Arrangement.SpaceBetween
     ) {
 
+        Spacer(modifier = Modifier.weight(0.5f))
         Text(
             text = "Nome",
             color = Color.White,
