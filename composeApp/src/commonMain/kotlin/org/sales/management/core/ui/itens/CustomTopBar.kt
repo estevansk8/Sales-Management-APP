@@ -24,6 +24,7 @@ import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import androidx.compose.material3.IconButton
 import androidx.compose.material3.TopAppBarDefaults
+import androidx.compose.ui.text.font.FontWeight
 
 
 @Composable
@@ -34,14 +35,17 @@ fun CustomTopBar(
     TopAppBar(
         modifier = Modifier
             .fillMaxWidth()
+            .padding(top = 16.dp)
             .height(72.dp),
         title = {
             Text(
                 text = title,
+                color = Color.Black,
                 textAlign = TextAlign.Center,
                 maxLines = 2,
                 overflow = TextOverflow.Ellipsis,
-                fontSize = 18.sp,
+                fontSize = 24.sp,
+                fontWeight = FontWeight.Bold,
                 modifier = Modifier.fillMaxWidth()
             )
         },
@@ -50,17 +54,22 @@ fun CustomTopBar(
                 Icon(
                     imageVector = Icons.Default.ArrowBack,
                     tint = Color.Black,
-                    contentDescription = "Voltar"
+                    contentDescription = "Voltar",
+                    modifier = Modifier.size(32.dp)
                 )
             }
         },
         actions = {
-            IconButton(onClick = {  }) {
+            IconButton(
+                onClick = {  },
+                modifier = Modifier.padding(end = 16.dp)
+            ) {
                 Box(
                     modifier = Modifier
                         .size(48.dp)
                         .clip(CircleShape)
                         .background(Color.Gray)
+                        .padding(8.dp)
                 ) {
                     IconButton(onClick = { }) {
                         Icon(
@@ -70,11 +79,12 @@ fun CustomTopBar(
                             modifier = Modifier
                                 .size(40.dp)
                                 .background(Color.Gray, CircleShape)
-                                .padding(8.dp)
                         )
                     }
                 }
             }
         },
+        backgroundColor = Color.White,
+        elevation = 0.dp,
     )
 }

@@ -23,6 +23,7 @@ import androidx.compose.ui.unit.dp
 import org.koin.compose.viewmodel.koinViewModel
 import org.sales.management.clients.presentation.list.ClientItem
 import org.sales.management.clients.presentation.list.ClientsListViewModel
+import org.sales.management.core.ui.itens.CustomTopBar
 
 @Composable
 fun ProductsListScreen(
@@ -38,6 +39,12 @@ fun ProductsListScreen(
     }
 
     Scaffold(
+        topBar = {
+            CustomTopBar(
+                title = "Detalhes\ndo Cliente",
+                onBack = {  },
+            )
+        },
         floatingActionButton = {
             FloatingActionButton(
                 backgroundColor = MaterialTheme.colorScheme.primary,
