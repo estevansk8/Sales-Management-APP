@@ -23,7 +23,7 @@ import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.unit.dp
 
 @Composable
-fun CustomBottomBar(
+fun BottomBar(
     selectedIndex: Int = 0,
     onItemSelected: (Int) -> Unit
 ) {
