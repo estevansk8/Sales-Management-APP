@@ -21,9 +21,7 @@ import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.unit.dp
 import org.koin.compose.viewmodel.koinViewModel
-import org.sales.management.clients.presentation.list.ClientItem
-import org.sales.management.clients.presentation.list.ClientsListViewModel
-import org.sales.management.core.ui.itens.CustomTopBar
+import org.sales.management.core.ui.itens.TopBar
 
 @Composable
 fun ProductsListScreen(
@@ -41,7 +39,7 @@ fun ProductsListScreen(
 
     Scaffold(
         topBar = {
-            CustomTopBar(
+            TopBar(
                 title = "Lista\nde Produtos",
                 onBack = { goBack() },
             )
