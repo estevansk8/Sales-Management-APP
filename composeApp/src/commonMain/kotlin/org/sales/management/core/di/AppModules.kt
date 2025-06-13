@@ -19,6 +19,7 @@ import org.sales.management.home.presentation.HomeViewModel
 import org.sales.management.products.data.remote.ProductService
 import org.sales.management.products.data.repositories.ProductMockRepositoryImpl
 import org.sales.management.products.domain.repository.ProductRepository
+import org.sales.management.products.presentation.form.ProductFormsViewModel
 import org.sales.management.products.presentation.list.ProductsListViewModel
 
 
@@ -104,6 +105,12 @@ private val viewModelModule = module {
 
     viewModel {
         ProductsListViewModel(
+            repository = get()
+        )
+    }
+
+    viewModel {
+        ProductFormsViewModel(
             repository = get()
         )
     }

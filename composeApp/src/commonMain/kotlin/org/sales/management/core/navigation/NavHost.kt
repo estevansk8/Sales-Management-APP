@@ -10,6 +10,7 @@ import org.sales.management.clients.presentation.list.ClientsListScreen
 import org.sales.management.clients.presentation.form.ClientFormsScreen
 import org.sales.management.core.ui.splash.SplashScreen
 import org.sales.management.home.presentation.HomeScreen
+import org.sales.management.products.presentation.form.ProductFormsScreen
 import org.sales.management.products.presentation.list.ProductsListScreen
 
 
@@ -81,6 +82,9 @@ fun NavHost(
                     navController.navigate(ProductsFormScreen)
                 }
             )
+        }
+        composable<ProductsFormScreen>{
+            ProductFormsScreen()
         }
     }
 }
