@@ -31,6 +31,7 @@ import managementsalesapp.composeapp.generated.resources.Res
 import managementsalesapp.composeapp.generated.resources.img
 import managementsalesapp.composeapp.generated.resources.login
 import org.jetbrains.compose.resources.painterResource
+import org.sales.management.core.ui.itens.FormsButton
 
 @Composable
 fun CreateUserScreen(
@@ -108,16 +109,10 @@ fun CreateUserScreen(
 
             Spacer(modifier = Modifier.height(16.dp))
 
-            Button(
-                onClick = onLogin,
-                modifier = Modifier
-                    .fillMaxWidth()
-                    .height(48.dp),
-                shape = RoundedCornerShape(50),
-                colors = ButtonDefaults.buttonColors(containerColor = Color(0xFF66A06F))
-            ) {
-                Text("Criar Conta")
-            }
+            FormsButton(
+                text = "Criar Conta",
+                onClick = {  }
+            )
         }
     }
 }

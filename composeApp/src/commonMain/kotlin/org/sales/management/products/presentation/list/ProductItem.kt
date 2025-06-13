@@ -55,7 +55,7 @@ fun ProductItem(product: Product) {
         )
 
         Text(
-            text = "R$: ${product.price}",
+            text = "R$:${product.price}",
             style = MaterialTheme.typography.bodyLarge.copy(fontWeight = FontWeight.Medium)
         )
 

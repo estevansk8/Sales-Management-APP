@@ -19,12 +19,14 @@ import androidx.compose.runtime.getValue
 import androidx.compose.runtime.mutableStateOf
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.shape.RoundedCornerShape
+import androidx.compose.foundation.text.KeyboardOptions
 import androidx.compose.material3.OutlinedTextField
 import androidx.compose.material3.Button
 import androidx.compose.material3.TextField
 import androidx.compose.material3.TextFieldDefaults
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.text.font.FontWeight
+import androidx.compose.ui.text.input.KeyboardType
 import androidx.compose.ui.unit.sp
 import org.sales.management.core.ui.itens.CustomTopBar
 import org.sales.management.core.ui.itens.FormsButton
@@ -62,21 +64,24 @@ fun ClientFormsScreen(
                 value = name,
                 onValueChange = { name = it },
                 label = { Text("Nome") },
-                modifier = Modifier.fillMaxWidth().padding(horizontal = 12.dp)
+                modifier = Modifier.fillMaxWidth().padding(horizontal = 12.dp),
+                keyboardOptions = KeyboardOptions(keyboardType = KeyboardType.Text)
             )
 
             OutlinedTextField(
                 value = phone,
                 onValueChange = { phone = it },
                 label = { Text("Telefone") },
-                modifier = Modifier.fillMaxWidth().padding(horizontal = 12.dp)
+                modifier = Modifier.fillMaxWidth().padding(horizontal = 12.dp),
+                keyboardOptions = KeyboardOptions(keyboardType = KeyboardType.Phone)
             )
 
             OutlinedTextField(
                 value = address,
                 onValueChange = { address = it },
                 label = { Text("Endereço") },
-                modifier = Modifier.fillMaxWidth().padding(horizontal = 12.dp)
+                modifier = Modifier.fillMaxWidth().padding(horizontal = 12.dp),
+                keyboardOptions = KeyboardOptions(keyboardType = KeyboardType.Text)
             )
 
             Spacer(modifier = Modifier.height(16.dp))
