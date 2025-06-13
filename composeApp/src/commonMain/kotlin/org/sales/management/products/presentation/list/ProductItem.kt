@@ -10,7 +10,10 @@ import androidx.compose.foundation.layout.size
 import androidx.compose.foundation.layout.width
 import androidx.compose.foundation.shape.CircleShape
 import androidx.compose.material.icons.Icons
+import androidx.compose.material.icons.filled.CheckCircle
 import androidx.compose.material.icons.filled.Edit
+import androidx.compose.material.icons.filled.Error
+import androidx.compose.material.icons.filled.Warning
 import androidx.compose.material3.Icon
 import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.Text
@@ -57,5 +60,32 @@ fun ProductItem(product: Product) {
             modifier = Modifier.weight(0.5f),
             style = MaterialTheme.typography.bodyLarge
         )
+        if (product.stock in 1..5) {
+            Icon(
+                imageVector = Icons.Default.Warning,
+                contentDescription = "Editar",
+                tint = Color.Gray,
+                modifier = Modifier
+                    .size(24.dp)
+            )
+        }
+        if (product.stock > 5) {
+            Icon(
+                imageVector = Icons.Default.CheckCircle,
+                contentDescription = "Editar",
+                tint = Color(0xFF66A06F),
+                modifier = Modifier
+                    .size(24.dp)
+            )
+        }
+        if (product.stock <= 0) {
+            Icon(
+                imageVector = Icons.Default.Error,
+                contentDescription = "Editar",
+                tint = Color.Red,
+                modifier = Modifier
+                    .size(24.dp)
+            )
+        }
     }
 }
