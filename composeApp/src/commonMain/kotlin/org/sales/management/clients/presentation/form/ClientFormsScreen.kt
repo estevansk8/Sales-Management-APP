@@ -103,20 +103,12 @@ fun ClientFormsScreen(
                     horizontalAlignment = Alignment.CenterHorizontally
                 ) {
 
-
                     InputField(
                         label = "Nome",
                         value = name,
                         onValueChange = { name = it },
                         keyboardType = KeyboardType.Text
                     )
-//                    OutlinedTextField(
-//                        value = name,
-//                        onValueChange = { name = it },
-//                        label = { Text("Nome") },
-//                        modifier = Modifier.fillMaxWidth().padding(horizontal = 12.dp),
-//                        keyboardOptions = KeyboardOptions(keyboardType = KeyboardType.Text)
-//                    )
 
                     InputField(
                         label = "Telefone",
@@ -125,28 +117,12 @@ fun ClientFormsScreen(
                         keyboardType = KeyboardType.Phone
                     )
 
-//                    OutlinedTextField(
-//                        value = phone,
-//                        onValueChange = { phone = it },
-//                        label = { Text("Telefone") },
-//                        modifier = Modifier.fillMaxWidth().padding(horizontal = 12.dp),
-//                        keyboardOptions = KeyboardOptions(keyboardType = KeyboardType.Phone)
-//                    )
-
                     InputField(
                         label = "Endereço",
                         value = address,
                         onValueChange = { address = it },
                         keyboardType = KeyboardType.Text
                     )
-
-//                    OutlinedTextField(
-//                        value = address,
-//                        onValueChange = { address = it },
-//                        label = { Text("Endereço") },
-//                        modifier = Modifier.fillMaxWidth().padding(horizontal = 12.dp),
-//                        keyboardOptions = KeyboardOptions(keyboardType = KeyboardType.Text)
-//                    )
 
                     Spacer(modifier = Modifier.height(16.dp))
 
