@@ -18,7 +18,7 @@ import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 
 @Composable
-fun CustomInputField(
+fun InputField(
     label: String,
     value: String,
     onValueChange: (String) -> Unit,
