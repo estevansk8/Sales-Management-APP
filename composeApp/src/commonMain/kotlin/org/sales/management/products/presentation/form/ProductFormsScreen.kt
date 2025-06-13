@@ -14,9 +14,13 @@ import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.foundation.text.KeyboardOptions
 import androidx.compose.material.Scaffold
 import androidx.compose.material3.OutlinedTextField
+import androidx.compose.material3.Snackbar
+import androidx.compose.material3.SnackbarHost
+import androidx.compose.material3.SnackbarHostState
 import androidx.compose.material3.Surface
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
+import androidx.compose.runtime.LaunchedEffect
 import androidx.compose.runtime.getValue
 import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.remember
@@ -45,6 +49,15 @@ fun ProductFormsScreen(
     var price by remember { mutableStateOf("") }
     var stock by remember { mutableStateOf(0) }
 
+    val snackbarHostState = remember { SnackbarHostState() }
+    var snackbarColor by remember { mutableStateOf(Color.Unspecified) }
+
+    LaunchedEffect(Unit) {
+        viewModel.eventFlow.collect { event ->
+            snackbarColor = if (event.isError) Color(0xFFD32F2F) else Color(0xFF388E3C)
+            snackbarHostState.showSnackbar(event.message)
+        }
+    }
 
     Scaffold(
         topBar = {
@@ -52,6 +65,14 @@ fun ProductFormsScreen(
                 title = "Cadastro\nde Produto",
                 onBack = { goBack() },
             )
+        },
+        snackbarHost = {
+            SnackbarHost(hostState = snackbarHostState) { data ->
+                Snackbar(
+                    snackbarData = data,
+                    containerColor = snackbarColor
+                )
+            }
         }
     ) { padding ->
 
@@ -66,7 +87,7 @@ fun ProductFormsScreen(
             Image(
                 painter = painterResource(Res.drawable.img),
                 contentDescription = null,
-                modifier = Modifier.size(200.dp)
+                modifier = Modifier.size(236.dp)
             )
 
             Surface(

@@ -26,7 +26,7 @@ class ProductService (
 
         return when (response.status){
             HttpStatusCode.OK -> {
-                val productsResponse : ProductResponse = response.body()
+                val productsResponse : ProductResponse<List<Product>> = response.body()
                 return productsResponse.data
             }
             else -> null
@@ -39,8 +39,9 @@ class ProductService (
         }
 
         return when (response.status) {
-            HttpStatusCode.OK -> {
-                response.body()
+            HttpStatusCode.Created, HttpStatusCode.OK -> {
+                val productResponse: ProductResponse<Product> = response.body()
+                productResponse.data
             }
 
             else -> throw Exception("Erro ao criar produto")
