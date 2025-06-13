@@ -1,5 +1,6 @@
 package org.sales.management.clients.presentation.list
 
+import androidx.compose.foundation.gestures.scrollable
 import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.fillMaxSize
@@ -81,6 +82,7 @@ fun ClientsListScreen(
                 modifier = Modifier
                     .fillMaxSize()
                     .padding(16.dp)
+                    
             ) {
                 items(clients) { client ->
                     ClientItem(client)

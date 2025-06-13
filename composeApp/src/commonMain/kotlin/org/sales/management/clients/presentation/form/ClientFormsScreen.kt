@@ -20,9 +20,11 @@ import androidx.compose.runtime.mutableStateOf
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.text.KeyboardOptions
 import androidx.compose.material3.OutlinedTextField
+import androidx.compose.material3.Snackbar
 import androidx.compose.material3.SnackbarHost
 import androidx.compose.material3.SnackbarHostState
 import androidx.compose.runtime.LaunchedEffect
+import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.text.input.KeyboardType
 import org.sales.management.core.ui.composables.TopBar
 import org.sales.management.core.ui.composables.FormsButton
@@ -38,10 +40,12 @@ fun ClientFormsScreen(
     var address by remember { mutableStateOf("") }
 
     val snackbarHostState = remember { SnackbarHostState() }
+    var snackbarColor by remember { mutableStateOf(Color.Unspecified) }
 
     LaunchedEffect(Unit) {
-        viewModel.eventFlow.collect { message ->
-            snackbarHostState.showSnackbar(message)
+        viewModel.eventFlow.collect { event ->
+            snackbarColor = if (event.isError) Color(0xFFD32F2F) else Color(0xFF388E3C)
+            snackbarHostState.showSnackbar(event.message)
         }
     }
 
@@ -52,7 +56,14 @@ fun ClientFormsScreen(
                 onBack = { goBack() },
             )
         },
-        snackbarHost = { SnackbarHost(hostState = snackbarHostState) }
+        snackbarHost = {
+            SnackbarHost(hostState = snackbarHostState) { data ->
+                Snackbar(
+                    snackbarData = data,
+                    containerColor = snackbarColor
+                )
+            }
+        }
     ) { padding ->
         Column(
             modifier = Modifier

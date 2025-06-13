@@ -1,6 +1,6 @@
 package org.sales.management.core.ui
 
-data class SnackBarEvent(
+data class SnackbarEvent(
     val message: String,
     val isError: Boolean
 )

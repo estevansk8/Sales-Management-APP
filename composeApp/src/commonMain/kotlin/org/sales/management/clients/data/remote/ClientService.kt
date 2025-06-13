@@ -24,9 +24,11 @@ class ClientService (
 
         println(response.status.toString())
 
+        val clientsResponse: ClientsResponse<List<Client>> = response.body()
+
+
         return when (response.status){
             HttpStatusCode.OK -> {
-                val clientsResponse : ClientsResponse = response.body()
                 return clientsResponse.data
             }
             else -> null
@@ -38,10 +40,12 @@ class ClientService (
             setBody(request)
         }
 
+        val clientResponse: ClientsResponse<ClientDTO> = response.body()
+        val client = clientResponse.data
+
         return when (response.status) {
             HttpStatusCode.OK,
-            HttpStatusCode.Created->  response.body()
-
+            HttpStatusCode.Created->  client
             else -> throw Exception("${response.status}")
         }
     }
