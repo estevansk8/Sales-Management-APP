@@ -131,50 +131,11 @@ fun ProductFormsScreen(
                         text = "Cadastrar",
                         onClick = { viewModel.saveProduct(name, price, stock)}
                     )
+
+                    Spacer(modifier = Modifier.height(28.dp))
+
                 }
             }
         }
-
-//                    Column(
-//            modifier = Modifier
-//                .fillMaxSize()
-//                .padding(padding)
-//                .padding(16.dp),
-//            verticalArrangement = Arrangement.Center,
-//            horizontalAlignment = Alignment.CenterHorizontally
-//        ) {
-//            OutlinedTextField(
-//                value = name,
-//                onValueChange = { name = it },
-//                label = { Text("Nome") },
-//                modifier = Modifier.fillMaxWidth().padding(horizontal = 12.dp),
-//                keyboardOptions = KeyboardOptions(keyboardType = KeyboardType.Text)
-//            )
-//
-//            OutlinedTextField(
-//                value = price,
-//                onValueChange = { price = it },
-//                label = { Text("Preço") },
-//                modifier = Modifier.fillMaxWidth().padding(horizontal = 12.dp),
-//                keyboardOptions = KeyboardOptions(keyboardType = KeyboardType.Decimal)
-//            )
-//
-//            OutlinedTextField(
-//                value = stock.toString(),
-//                onValueChange = { stock = it.toIntOrNull() ?: 0 },
-//                label = { Text("Estoque") },
-//                modifier = Modifier.fillMaxWidth().padding(horizontal = 12.dp),
-//                keyboardOptions = KeyboardOptions(keyboardType = KeyboardType.Number)
-//            )
-//
-//            Spacer(modifier = Modifier.height(16.dp))
-//
-//            FormsButton(
-//                text = "Cadastrar",
-//                onClick = {
-//                    viewModel.saveProduct(name, price, stock)
-//                }
-//            )
-//        }
     }
 }
