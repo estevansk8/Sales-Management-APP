@@ -27,6 +27,7 @@ import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.unit.sp
 import org.sales.management.core.ui.itens.CustomTopBar
+import org.sales.management.core.ui.itens.FormsButton
 
 
 @Composable
@@ -52,7 +53,7 @@ fun ClientFormsScreen(
                 .fillMaxSize()
                 .padding(padding)
                 .padding(16.dp),
-            verticalArrangement = Arrangement.Top,
+            verticalArrangement = Arrangement.Center,
             horizontalAlignment = Alignment.CenterHorizontally
         ) {
 
@@ -80,18 +81,13 @@ fun ClientFormsScreen(
 
             Spacer(modifier = Modifier.height(16.dp))
 
-            Button(
+            FormsButton(
+                text = "Cadastrar",
                 onClick = {
                     viewModel.saveClient(name, phone, address)
-                },
-                modifier = Modifier.align(Alignment.CenterHorizontally)
-            ) {
-                Text(
-                    text = "Cadastar",
-                    fontWeight = FontWeight.Bold,
-                    fontSize = 16.sp
-                )
-            }
+                }
+            )
+
         }
     }
 }

@@ -21,6 +21,7 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.unit.dp
 import org.koin.compose.viewmodel.koinViewModel
 import org.sales.management.core.ui.itens.CustomTopBar
+import org.sales.management.core.ui.itens.FormsButton
 
 
 @Composable
@@ -72,14 +73,12 @@ fun ProductFormsScreen(
 
             Spacer(modifier = Modifier.height(16.dp))
 
-            Button(
+            FormsButton(
+                text = "Cadastrar",
                 onClick = {
                     viewModel.saveProduct(name, price, stock)
-                },
-                modifier = Modifier.align(Alignment.CenterHorizontally)
-            ) {
-                Text("Cadastar")
-            }
+                }
+            )
         }
     }
 }
