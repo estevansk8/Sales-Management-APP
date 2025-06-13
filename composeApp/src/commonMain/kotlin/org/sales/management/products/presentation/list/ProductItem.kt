@@ -9,6 +9,9 @@ import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.layout.size
 import androidx.compose.foundation.layout.width
 import androidx.compose.foundation.shape.CircleShape
+import androidx.compose.material.icons.Icons
+import androidx.compose.material.icons.filled.Edit
+import androidx.compose.material3.Icon
 import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
@@ -23,42 +26,36 @@ import org.sales.management.products.domain.model.Product
 @Composable
 fun ProductItem(product: Product) {
     Row(
-        verticalAlignment = Alignment.CenterVertically,
         modifier = Modifier
             .fillMaxWidth()
-            .padding(4.dp)
+            .padding(vertical = 8.dp),
+        verticalAlignment = Alignment.CenterVertically
     ) {
-        val initial = product.name.firstOrNull()?.uppercase() ?: "#"
-
-        Box(
-            contentAlignment = Alignment.Center,
+        Icon(
+            imageVector = Icons.Default.Edit,
+            contentDescription = "Editar",
+            tint = Color.Black,
             modifier = Modifier
-                .size(40.dp)
-                .clip(CircleShape)
-                .background(MaterialTheme.colorScheme.primary)
-        ) {
-            Text(
-                text = initial,
-                style = MaterialTheme.typography.bodyLarge.copy(
-                    color = Color.White,
-                    fontWeight = FontWeight.Bold
-                )
-            )
-        }
-
-        Spacer(modifier = Modifier.width(12.dp))
-
+                .size(24.dp)
+                .weight(0.5f)
+        )
         Text(
-            modifier = Modifier.weight(1f),
             text = product.name,
-            style = MaterialTheme.typography.bodyLarge.copy(fontWeight = FontWeight.Medium)
+            fontWeight = FontWeight.Bold,
+            modifier = Modifier
+                .weight(3f)
+                .padding(start = 8.dp),
+            style = MaterialTheme.typography.bodyLarge
         )
-
         Text(
-            text = "R$:${product.price}",
-            style = MaterialTheme.typography.bodyLarge.copy(fontWeight = FontWeight.Medium)
+            text = "R$ ${product.price}",
+            modifier = Modifier.weight(2.5f),
+            style = MaterialTheme.typography.bodyLarge
         )
-
-
+        Text(
+            text = product.stock.toString(),
+            modifier = Modifier.weight(0.5f),
+            style = MaterialTheme.typography.bodyLarge
+        )
     }
 }

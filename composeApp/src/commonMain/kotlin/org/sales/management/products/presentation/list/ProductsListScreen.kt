@@ -82,8 +82,12 @@ fun ProductsListScreen(
             LazyColumn(
                 modifier = Modifier
                     .fillMaxSize()
-                    .padding(16.dp)
+                    .padding(8.dp)
             ) {
+                item{
+                    ProductListHeader()
+                }
+
                 items(products) { product ->
                     ProductItem(product)
                     Divider(modifier = Modifier.padding(vertical = 8.dp))
