@@ -70,21 +70,35 @@ fun NavHost(
             ClientsListScreen(
                 goToClientForm = {
                     navController.navigate(ClientsFormScreen)
+                },
+                goBack = {
+                    navController.popBackStack()
                 }
             )
         }
         composable<ClientsFormScreen>{
-            ClientFormsScreen()
+            ClientFormsScreen(
+                goBack = {
+                    navController.popBackStack()
+                }
+            )
         }
         composable<ProductsListScreen>{
             ProductsListScreen(
                 goToProductForm = {
                     navController.navigate(ProductsFormScreen)
+                },
+                goBack = {
+                    navController.popBackStack()
                 }
             )
         }
         composable<ProductsFormScreen>{
-            ProductFormsScreen()
+            ProductFormsScreen(
+                goBack = {
+                    navController.popBackStack()
+                }
+            )
         }
     }
 }

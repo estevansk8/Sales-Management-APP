@@ -18,12 +18,20 @@ import androidx.compose.runtime.setValue
 import androidx.compose.runtime.getValue
 import androidx.compose.runtime.mutableStateOf
 import androidx.compose.foundation.layout.Arrangement
+import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.material3.OutlinedTextField
 import androidx.compose.material3.Button
+import androidx.compose.material3.TextField
+import androidx.compose.material3.TextFieldDefaults
+import androidx.compose.ui.graphics.Color
+import androidx.compose.ui.text.font.FontWeight
+import androidx.compose.ui.unit.sp
+import org.sales.management.core.ui.itens.CustomTopBar
 
 
 @Composable
 fun ClientFormsScreen(
+    goBack: () -> Unit,
     viewModel: ClientFormsViewModel = koinViewModel()
 ) {
     var name by remember { mutableStateOf("") }
@@ -31,15 +39,24 @@ fun ClientFormsScreen(
     var address by remember { mutableStateOf("") }
 
 
-    Scaffold() { padding ->
+    Scaffold(
+        topBar = {
+            CustomTopBar(
+                title = "Cadastro\nde Cliente",
+                onBack = { goBack() },
+            )
+        }
+    ) { padding ->
         Column(
             modifier = Modifier
                 .fillMaxSize()
                 .padding(padding)
                 .padding(16.dp),
-            verticalArrangement = Arrangement.Center,
+            verticalArrangement = Arrangement.Top,
             horizontalAlignment = Alignment.CenterHorizontally
         ) {
+
+
             OutlinedTextField(
                 value = name,
                 onValueChange = { name = it },
@@ -69,7 +86,11 @@ fun ClientFormsScreen(
                 },
                 modifier = Modifier.align(Alignment.CenterHorizontally)
             ) {
-                Text("Cadastar")
+                Text(
+                    text = "Cadastar",
+                    fontWeight = FontWeight.Bold,
+                    fontSize = 16.sp
+                )
             }
         }
     }

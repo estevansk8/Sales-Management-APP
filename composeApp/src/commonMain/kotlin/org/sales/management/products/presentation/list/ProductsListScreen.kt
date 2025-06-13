@@ -28,6 +28,7 @@ import org.sales.management.core.ui.itens.CustomTopBar
 @Composable
 fun ProductsListScreen(
     goToProductForm: () -> Unit,
+    goBack: () -> Unit,
     viewModel: ProductsListViewModel = koinViewModel()
 ) {
     val products = viewModel.products
@@ -41,8 +42,8 @@ fun ProductsListScreen(
     Scaffold(
         topBar = {
             CustomTopBar(
-                title = "Detalhes\ndo Cliente",
-                onBack = {  },
+                title = "Lista\nde Produtos",
+                onBack = { goBack() },
             )
         },
         floatingActionButton = {

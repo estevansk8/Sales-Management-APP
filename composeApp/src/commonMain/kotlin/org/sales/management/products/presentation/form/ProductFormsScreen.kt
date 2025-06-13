@@ -20,9 +20,12 @@ import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.unit.dp
 import org.koin.compose.viewmodel.koinViewModel
+import org.sales.management.core.ui.itens.CustomTopBar
+
 
 @Composable
 fun ProductFormsScreen(
+    goBack: () -> Unit,
     viewModel: ProductFormsViewModel = koinViewModel()
 ) {
     var name by remember { mutableStateOf("") }
@@ -30,7 +33,14 @@ fun ProductFormsScreen(
     var stock by remember { mutableStateOf(0) }
 
 
-    Scaffold() { padding ->
+    Scaffold(
+        topBar = {
+            CustomTopBar(
+                title = "Cadastro\nde Produto",
+                onBack = { goBack() },
+            )
+        }
+    ) { padding ->
         Column(
             modifier = Modifier
                 .fillMaxSize()
