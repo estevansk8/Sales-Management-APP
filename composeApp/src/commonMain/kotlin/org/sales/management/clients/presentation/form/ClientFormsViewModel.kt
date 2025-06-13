@@ -7,6 +7,8 @@ import androidx.compose.runtime.setValue
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import kotlinx.coroutines.Dispatchers
+import kotlinx.coroutines.flow.MutableSharedFlow
+import kotlinx.coroutines.flow.asSharedFlow
 import kotlinx.coroutines.launch
 import org.sales.management.clients.domain.model.Client
 import org.sales.management.clients.domain.model.ClientDTO
@@ -19,6 +21,9 @@ class ClientFormsViewModel(
 
     var isLoading by mutableStateOf(false)
 
+    private val _eventFlow = MutableSharedFlow<String>()
+    val eventFlow = _eventFlow.asSharedFlow()
+
     private suspend fun createClient(client: ClientRequest): ClientDTO{
         println("Entrou saveClient")
         return repository.createClient(client)
@@ -29,8 +34,9 @@ class ClientFormsViewModel(
             isLoading = true
             try {
                 createClient(ClientRequest(name, phone, address))
+                _eventFlow.emit("Cliente criado com sucesso!")
             } catch (e: Exception) {
-                println("Erro ao buscar clientes: ${e.message}")
+                println(e)
             } finally {
                 isLoading = false
             }
