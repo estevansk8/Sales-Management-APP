@@ -80,6 +80,7 @@ kotlin {
             implementation(libs.bundles.ktor)
             implementation (libs.androidx.material)
             implementation(libs.bignum)
+            implementation(libs.kotlinx.datetime)
 
             implementation(libs.koin.compose)
             implementation(libs.koin.compose.viewmodel)
@@ -130,6 +131,7 @@ dependencies {
     implementation(libs.androidx.navigation.runtime.android)
     implementation(libs.kotlinx.coroutines.android)
     implementation(libs.androidx.foundation.layout.android)
+    implementation(libs.places)
     debugImplementation(compose.uiTooling)
 }
 
