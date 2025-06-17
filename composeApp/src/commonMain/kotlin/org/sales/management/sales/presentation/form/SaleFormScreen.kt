@@ -21,6 +21,7 @@ import org.sales.management.sales.presentation.form.components.TotalFooter
 
 @Composable
 fun SaleFormScreen(
+    goBack: () -> Unit,
     viewModel: SaleFormsViewModel = koinViewModel()
 ){
 

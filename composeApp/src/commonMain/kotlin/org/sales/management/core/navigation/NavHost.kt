@@ -12,6 +12,7 @@ import org.sales.management.core.ui.splash.SplashScreen
 import org.sales.management.home.presentation.HomeScreen
 import org.sales.management.products.presentation.form.ProductFormsScreen
 import org.sales.management.products.presentation.list.ProductsListScreen
+import org.sales.management.sales.presentation.form.SaleFormScreen
 
 
 @Composable
@@ -95,6 +96,13 @@ fun NavHost(
         }
         composable<ProductsFormScreen>{
             ProductFormsScreen(
+                goBack = {
+                    navController.popBackStack()
+                }
+            )
+        }
+        composable<SaleFormScreen>{
+            SaleFormScreen(
                 goBack = {
                     navController.popBackStack()
                 }
