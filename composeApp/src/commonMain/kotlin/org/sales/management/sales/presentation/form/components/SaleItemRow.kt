@@ -45,10 +45,10 @@ fun SaleItemRow(
         // 2. Nome e Preço Unitário
         Column(modifier = Modifier.weight(1f).padding(horizontal = 8.dp)) {
             Text(item.name, fontWeight = FontWeight.Bold)
-            Text("R$ ${item.unitPrice}", style = MaterialTheme.typography.h5)
+            Text("R$ ${item.unitPrice.toPlainString()}", style = MaterialTheme.typography.h5)
         }
 
         // 3. Preço Total do Item
-        Text("R$ ${item.subtotal}", fontWeight = FontWeight.SemiBold)
+        Text("R$ ${item.subtotal.toPlainString()}", fontWeight = FontWeight.SemiBold)
     }
 }

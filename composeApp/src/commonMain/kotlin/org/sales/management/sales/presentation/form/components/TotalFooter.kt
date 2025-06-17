@@ -19,7 +19,8 @@ import androidx.compose.foundation.layout.Spacer
 import androidx.compose.foundation.layout.height
 import androidx.compose.foundation.layout.size
 import androidx.compose.material3.ButtonDefaults
-
+import androidx.compose.ui.graphics.Color
+import org.sales.management.core.ui.composables.FormsButton
 
 
 @Composable
@@ -34,15 +35,16 @@ fun TotalFooter(
                 modifier = Modifier.fillMaxWidth(),
                 horizontalArrangement = Arrangement.SpaceBetween
             ) {
-                Text("TOTAL", style = MaterialTheme.typography.h6, fontWeight = FontWeight.Bold)
-                Text("R$ $totalAmount", style = MaterialTheme.typography.h6, fontWeight = FontWeight.Bold) // Formate a moeda
+                Text("TOTAL", style = MaterialTheme.typography.h5, fontWeight = FontWeight.Bold)
+                Text("R$ ${totalAmount.toPlainString()}", style = MaterialTheme.typography.h5, fontWeight = FontWeight.Bold) // Formate a moeda
             }
             Spacer(Modifier.height(16.dp))
+
             Button(
                 onClick = onSubmit,
                 colors = ButtonDefaults.buttonColors(
-                    containerColor = MaterialTheme.colors.primary,
-                    contentColor = MaterialTheme.colors.onPrimary
+                    containerColor = Color(0xFF66A06F),
+                    contentColor = Color.White
                 ),
                 modifier = Modifier.fillMaxWidth(),
                 enabled = !isSubmitting && totalAmount > BigDecimal.ZERO

@@ -27,6 +27,6 @@ data class SaleFormUiState(
 ) {
     val totalAmount: BigDecimal
         get() = saleItems.fold(BigDecimal.ZERO) { acc, item ->
-            acc + item.unitPrice
+            acc + item.subtotal
         }
 }
