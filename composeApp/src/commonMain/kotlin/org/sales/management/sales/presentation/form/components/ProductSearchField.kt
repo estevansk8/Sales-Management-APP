@@ -37,7 +37,10 @@ fun ProductSearchField(
     ) {
         OutlinedTextField(
             value = query,
-            onValueChange = onQueryChange,
+            onValueChange = {
+                onQueryChange(it)
+                expanded = true
+            },
             modifier = Modifier.fillMaxWidth().menuAnchor(),
             label = { Text("Buscar Produto") },
             trailingIcon = {

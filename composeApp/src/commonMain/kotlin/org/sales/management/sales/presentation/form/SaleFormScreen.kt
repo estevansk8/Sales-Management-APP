@@ -31,8 +31,8 @@ fun SaleFormScreen(
         topBar = { TopBar("Registrar Venda"){} },
         bottomBar = {
             TotalFooter(
-                totalAmount = BigDecimal.ZERO,
-                onSubmit = {  },
+                totalAmount = uiState.totalAmount,
+                onSubmit = viewModel::onSubmitSale,
                 isSubmitting = false
             )
         }
