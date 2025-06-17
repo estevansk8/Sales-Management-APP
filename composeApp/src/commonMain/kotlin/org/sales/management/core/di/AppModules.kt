@@ -115,6 +115,7 @@ private val viewModelModule = module {
             repository = get()
         )
     }
+
 }
 
 val appModules = listOf(
