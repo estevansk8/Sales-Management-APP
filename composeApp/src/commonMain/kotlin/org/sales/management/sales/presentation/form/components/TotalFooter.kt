@@ -34,8 +34,8 @@ fun TotalFooter(
                 modifier = Modifier.fillMaxWidth(),
                 horizontalArrangement = Arrangement.SpaceBetween
             ) {
-                Text("TOTAL", style = MaterialTheme.typography.h3, fontWeight = FontWeight.Bold)
-                Text("R$ $totalAmount", style = MaterialTheme.typography.h3, fontWeight = FontWeight.Bold) // Formate a moeda
+                Text("TOTAL", style = MaterialTheme.typography.h6, fontWeight = FontWeight.Bold)
+                Text("R$ $totalAmount", style = MaterialTheme.typography.h6, fontWeight = FontWeight.Bold) // Formate a moeda
             }
             Spacer(Modifier.height(16.dp))
             Button(
