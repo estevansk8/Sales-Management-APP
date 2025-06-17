@@ -18,7 +18,7 @@ class ProductRepositoryImpl(
     }
 
     override suspend fun getProductsByName(name: String): List<Product>? {
-        TODO("Not yet implemented")
+        return service.getProductsByName(name)
     }
 
     override suspend fun createProduct(request: ProductRequest): Product {
