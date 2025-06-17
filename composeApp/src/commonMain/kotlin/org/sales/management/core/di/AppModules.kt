@@ -21,6 +21,9 @@ import org.sales.management.products.data.repositories.ProductRepositoryImpl
 import org.sales.management.products.domain.repository.ProductRepository
 import org.sales.management.products.presentation.form.ProductFormsViewModel
 import org.sales.management.products.presentation.list.ProductsListViewModel
+import org.sales.management.sales.data.remote.SaleService
+import org.sales.management.sales.data.repositories.SaleRepositoryImpl
+import org.sales.management.sales.domain.repository.SaleRepository
 import org.sales.management.sales.presentation.form.SaleFormsViewModel
 
 
@@ -70,6 +73,14 @@ private val dataModule = module {
             service = get()
         )
     }
+
+    single<SaleRepository> {
+        SaleRepositoryImpl(
+            saleService = get()
+        )
+    }
+
+
 
 }
 
