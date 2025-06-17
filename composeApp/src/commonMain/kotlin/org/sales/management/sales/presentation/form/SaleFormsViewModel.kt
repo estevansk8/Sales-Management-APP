@@ -92,6 +92,10 @@ class SaleFormsViewModel(
         _uiState.update { it.copy(selectedClient = client) }
     }
 
+    fun onDueDateSelected(date: LocalDate) {
+        _uiState.update { it.copy(dueDate = date) }
+    }
+
     fun onSubmitSale() {
         val currentState = _uiState.value
         if (currentState.selectedClient == null || currentState.saleItems.isEmpty()) return
@@ -122,5 +126,6 @@ class SaleFormsViewModel(
                 _uiState.update { it.copy(isSubmitting = false, submissionError = e.message) }
             }
         }
+
     }
 }

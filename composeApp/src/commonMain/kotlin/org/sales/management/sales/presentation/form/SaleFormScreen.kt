@@ -31,6 +31,7 @@ import managementsalesapp.composeapp.generated.resources.img
 import org.jetbrains.compose.resources.painterResource
 import org.koin.compose.viewmodel.koinViewModel
 import org.sales.management.sales.presentation.form.components.ClientSelector
+import org.sales.management.sales.presentation.form.components.DueDatePicker
 import org.sales.management.sales.presentation.form.components.ProductSearchField
 import org.sales.management.sales.presentation.form.components.SaleItemRow
 import org.sales.management.sales.presentation.form.components.TotalFooter
@@ -59,7 +60,10 @@ fun SaleFormScreen(
         }
     ) { paddingValues ->
         LazyColumn(
-            modifier = Modifier.fillMaxSize().padding(paddingValues).padding(16.dp),
+            modifier = Modifier.fillMaxSize()
+                .padding(paddingValues)
+                .padding(16.dp)
+                .background(Color.White),
             verticalArrangement = Arrangement.spacedBy(16.dp)
         ) {
 
@@ -75,18 +79,24 @@ fun SaleFormScreen(
                         onClientSelected = viewModel::onClientSelected
                     )
 
-                    Box(
-                        modifier = Modifier
-                            .size(48.dp)
-                            .background(Color.Transparent),
-                        contentAlignment = Alignment.Center
-                    ){
-                        Icon(
-                            imageVector = Icons.Default.CalendarMonth,
-                            contentDescription = "Calendar",
-                            tint = Color.Black,
-                        )
-                    }
+                    DueDatePicker(
+                        selectedDate = uiState.dueDate,
+                        onDateSelected = viewModel::onDueDateSelected,
+                        modifier = Modifier.weight(1f)
+                    )
+
+//                    Box(
+//                        modifier = Modifier
+//                            .size(48.dp)
+//                            .background(Color.Transparent),
+//                        contentAlignment = Alignment.Center
+//                    ){
+//                        Icon(
+//                            imageVector = Icons.Default.CalendarMonth,
+//                            contentDescription = "Calendar",
+//                            tint = Color.Black,
+//                        )
+//                    }
                 }
 
             }

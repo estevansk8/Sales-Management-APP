@@ -33,7 +33,7 @@ fun ClientSelector(
             value = selectedClient?.name ?: "",
             onValueChange = {},
             modifier = Modifier
-                .fillMaxWidth(fraction = 0.7f)
+                .fillMaxWidth(fraction = 0.5f)
                 .clickable { expanded = true },
             label = { Text("Cliente") },
             enabled = false,
