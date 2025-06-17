@@ -137,7 +137,8 @@ private val viewModelModule = module {
 
     viewModel {
         SaleFormsViewModel(
-            repository = get(),
+            saleRepository = get(),
+            clientRepository = get(),
             productRepository = get()
         )
     }
