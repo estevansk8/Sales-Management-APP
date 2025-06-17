@@ -36,7 +36,7 @@ fun TotalFooter(
                 horizontalArrangement = Arrangement.SpaceBetween
             ) {
                 Text("TOTAL", style = MaterialTheme.typography.h5, fontWeight = FontWeight.Bold)
-                Text("R$ ${totalAmount.toPlainString()}", style = MaterialTheme.typography.h5, fontWeight = FontWeight.Bold) // Formate a moeda
+                Text("R$ ${totalAmount.toPlainString()}", style = MaterialTheme.typography.h4, fontWeight = FontWeight.Bold)
             }
             Spacer(Modifier.height(16.dp))
 
@@ -52,7 +52,10 @@ fun TotalFooter(
                 if (isSubmitting) {
                     CircularProgressIndicator(modifier = Modifier.size(24.dp), color = MaterialTheme.colors.onPrimary)
                 } else {
-                    Text("SALVAR VENDA")
+                    Text(
+                        text = "SALVAR VENDA",
+                        fontWeight = FontWeight.Bold
+                    )
                 }
             }
         }
