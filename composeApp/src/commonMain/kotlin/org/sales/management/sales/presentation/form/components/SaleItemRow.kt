@@ -22,7 +22,7 @@ import androidx.compose.ui.text.font.FontWeight
 
 
 @Composable
-fun CartItemRow(
+fun SaleItemRow(
     item: SaleItem,
     onQuantityChange: (Int) -> Unit
 ) {

@@ -11,7 +11,7 @@ import androidx.compose.ui.unit.dp
 import androidx.compose.foundation.layout.Arrangement
 import org.koin.compose.viewmodel.koinViewModel
 import org.sales.management.sales.presentation.form.components.ProductSearchField
-
+import org.sales.management.sales.presentation.form.components.SaleItemRow
 
 @Composable
 fun SaleFormScreen(
@@ -51,7 +51,7 @@ fun SaleFormScreen(
             ) }
 
             items(uiState.cartItems) { cartItem ->
-                CartItemRow(
+                SaleItemRow(
                     item = cartItem,
                     onQuantityChange = { change -> viewModel.onQuantityChange(cartItem.productId, change) }
                 )
