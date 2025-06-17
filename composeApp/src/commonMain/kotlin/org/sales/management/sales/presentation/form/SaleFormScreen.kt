@@ -9,6 +9,9 @@ import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.padding
 import androidx.compose.ui.unit.dp
 import androidx.compose.foundation.layout.Arrangement
+import androidx.compose.foundation.lazy.items
+import androidx.compose.runtime.collectAsState
+import androidx.compose.runtime.getValue
 import com.ionspin.kotlin.bignum.decimal.BigDecimal
 import org.koin.compose.viewmodel.koinViewModel
 import org.sales.management.sales.domain.model.SaleItem
@@ -21,7 +24,7 @@ fun SaleFormScreen(
     viewModel: SaleFormsViewModel = koinViewModel()
 ){
 
-//    val uiState by viewModel.uiState.collectAsState()
+    val uiState by viewModel.uiState.collectAsState()
 
     Scaffold(
         topBar = { TopBar("Registrar Venda"){} },
@@ -41,9 +44,9 @@ fun SaleFormScreen(
             item {
                 ProductSearchField(
                     query = uiState.searchQuery,
-                    onQueryChange = {},
+                    onQueryChange = viewModel::onSearchQueryChange,
                     searchResults = uiState.searchResults,
-                    onProductSelected = {  },
+                    onProductSelected = viewModel::onProductSelected,
                     isSearching = uiState.isSearching
                 )
             }
@@ -60,14 +63,15 @@ fun SaleFormScreen(
 
 
 
-            items(uiState.cartItems) { cartItem ->
+            items(uiState.saleItems) { cartItem ->
                 SaleItemRow(
                     item = cartItem,
-                    onQuantityChange = {
-                        //TODO: change -> viewModel.onQuantityChange(cartItem.productId, change)
+                    onQuantityChange = { change ->
+                        viewModel.onQuantityChange(cartItem.productId, change)
                     }
                 )
             }
+
         }
     }
 
