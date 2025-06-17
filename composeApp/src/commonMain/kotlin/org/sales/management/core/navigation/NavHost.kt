@@ -54,6 +54,9 @@ fun NavHost(
         }
         composable<HomeScreen>{
             HomeScreen(
+                goMakeSale = {
+                    navController.navigate(SaleFormScreen)
+                },
                 goToClients = {
                     navController.navigate(ClientsListScreen)
                 },

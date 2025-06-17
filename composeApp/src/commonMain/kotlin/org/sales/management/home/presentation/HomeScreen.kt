@@ -51,6 +51,7 @@ import org.sales.management.home.domain.Feature
 
 @Composable
 fun HomeScreen(
+    goMakeSale : () -> Unit,
     goToClients : () -> Unit,
     goToProducts : () -> Unit,
     onExit: () -> Unit,
@@ -161,7 +162,7 @@ fun HomeScreen(
 
                 Spacer(modifier = Modifier.height(8.dp))
 
-                SalesCard {  }
+                SalesCard { goMakeSale() }
 
                 Text(
                     text = "Meu negócio",
