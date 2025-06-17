@@ -80,7 +80,14 @@ private val dataModule = module {
         )
     }
 
-
+    single<SaleService> {
+        SaleService(
+            httpClient = buildHttpClient(
+                dataStore = get(),
+                engine = getHttpEngine()
+            )
+        )
+    }
 
 }
 
