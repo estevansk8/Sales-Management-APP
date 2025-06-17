@@ -36,7 +36,7 @@ fun SaleItemRow(
             IconButton(onClick = { onQuantityChange(-1) }) {
                 Icon(Icons.Default.Remove, "Diminuir")
             }
-            Text(item.quantity.toString(), style = MaterialTheme.typography.h4)
+            Text(item.quantity.toString(), style = MaterialTheme.typography.h5)
             IconButton(onClick = { onQuantityChange(1) }) {
                 Icon(Icons.Default.Add, "Aumentar")
             }

@@ -1,6 +1,7 @@
 package org.sales.management.sales.presentation.form
 
 import androidx.compose.foundation.Image
+import androidx.compose.foundation.background
 import androidx.compose.material3.Scaffold
 import androidx.compose.runtime.Composable
 import org.sales.management.core.ui.composables.TopBar
@@ -12,22 +13,24 @@ import androidx.compose.ui.unit.dp
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.Column
+import androidx.compose.foundation.layout.Row
 import androidx.compose.foundation.layout.size
 import androidx.compose.foundation.lazy.items
+import androidx.compose.material.icons.Icons
+import androidx.compose.material.icons.filled.CalendarMonth
+import androidx.compose.material3.Icon
 import androidx.compose.material3.Text
 import androidx.compose.runtime.collectAsState
 import androidx.compose.runtime.getValue
 import androidx.compose.ui.Alignment
+import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.text.font.FontWeight
-import androidx.compose.ui.text.font.FontWeight.Companion
 import androidx.compose.ui.text.style.TextAlign
-import com.ionspin.kotlin.bignum.decimal.BigDecimal
 import managementsalesapp.composeapp.generated.resources.Res
 import managementsalesapp.composeapp.generated.resources.img
-import managementsalesapp.composeapp.generated.resources.login
 import org.jetbrains.compose.resources.painterResource
 import org.koin.compose.viewmodel.koinViewModel
-import org.sales.management.sales.domain.model.SaleItem
+import org.sales.management.sales.presentation.form.components.ClientSelector
 import org.sales.management.sales.presentation.form.components.ProductSearchField
 import org.sales.management.sales.presentation.form.components.SaleItemRow
 import org.sales.management.sales.presentation.form.components.TotalFooter
@@ -41,7 +44,12 @@ fun SaleFormScreen(
     val uiState by viewModel.uiState.collectAsState()
 
     Scaffold(
-        topBar = { TopBar("Registrar Venda"){} },
+        topBar = {
+            TopBar(
+                title = "Realizar Venda",
+                onBack = goBack
+            )
+        },
         bottomBar = {
             TotalFooter(
                 totalAmount = uiState.totalAmount,
@@ -55,6 +63,34 @@ fun SaleFormScreen(
             verticalArrangement = Arrangement.spacedBy(16.dp)
         ) {
 
+
+            item {
+                Row(
+                    modifier = Modifier.fillMaxSize(),
+                    horizontalArrangement = Arrangement.SpaceBetween,
+                ){
+                    ClientSelector(
+                        clients = uiState.clientList,
+                        selectedClient = uiState.selectedClient,
+                        onClientSelected = viewModel::onClientSelected
+                    )
+
+                    Box(
+                        modifier = Modifier
+                            .size(48.dp)
+                            .background(Color.Transparent),
+                        contentAlignment = Alignment.Center
+                    ){
+                        Icon(
+                            imageVector = Icons.Default.CalendarMonth,
+                            contentDescription = "Calendar",
+                            tint = Color.Black,
+                        )
+                    }
+                }
+
+            }
+
             item {
                 ProductSearchField(
                     query = uiState.searchQuery,
@@ -65,15 +101,7 @@ fun SaleFormScreen(
                 )
             }
 
-            item {
-//                ClientSelector(
-//                    clients = uiState.clientList,
-//                    selectedClient = uiState.selectedClient,
-//                    onClientSelected = viewModel::onClientSelected
-//                )
-            }
 
-            item { /* Componente de DatePicker para a Data de Vencimento */ }
 
 
             if (uiState.saleItems.isNotEmpty()) {
@@ -97,13 +125,13 @@ fun SaleFormScreen(
                             Image(
                                 painter = painterResource(Res.drawable.img),
                                 contentDescription = null,
-                                modifier = Modifier.size(240.dp)
+                                modifier = Modifier.size(200.dp)
                             )
                             Text(
                                 text = "Nenhum item\nadicionado por enquanto.",
                                 fontWeight = FontWeight.Bold,
                                 textAlign = TextAlign.Center,
-                                modifier = Modifier.padding(top = 16.dp)
+                                modifier = Modifier.padding(top = 20.dp)
                             )
                         }
                     }
