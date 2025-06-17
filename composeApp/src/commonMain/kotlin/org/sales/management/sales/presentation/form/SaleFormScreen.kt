@@ -9,10 +9,8 @@ import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.padding
 import androidx.compose.ui.unit.dp
 import androidx.compose.foundation.layout.Arrangement
-import androidx.compose.foundation.lazy.items
 import org.koin.compose.viewmodel.koinViewModel
-import org.sales.management.sales.presentation.form.SaleFormsViewModel
-
+import org.sales.management.sales.presentation.form.components.ProductSearchField
 
 
 @Composable
