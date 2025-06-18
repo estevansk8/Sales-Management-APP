@@ -13,6 +13,7 @@ import org.sales.management.home.presentation.HomeScreen
 import org.sales.management.products.presentation.form.ProductFormsScreen
 import org.sales.management.products.presentation.list.ProductsListScreen
 import org.sales.management.sales.presentation.form.SaleFormScreen
+import org.sales.management.sales.presentation.list.SaleListScreen
 
 
 @Composable
@@ -106,6 +107,14 @@ fun NavHost(
         }
         composable<SaleFormScreen>{
             SaleFormScreen(
+                goBack = {
+                    navController.popBackStack()
+                }
+            )
+        }
+        composable<SaleListScreen>{
+            SaleListScreen(
+                goToDetail = {},
                 goBack = {
                     navController.popBackStack()
                 }

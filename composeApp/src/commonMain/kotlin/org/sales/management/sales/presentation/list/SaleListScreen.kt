@@ -26,6 +26,7 @@ import org.sales.management.sales.presentation.list.SaleListViewModel
 @Composable
 fun SaleListScreen(
     goToDetail: (saleId: Long) -> Unit,
+    goBack: () -> Unit,
     viewModel: SaleListViewModel = koinViewModel()
 ) {
     val sales by viewModel.salesState.collectAsState()
@@ -40,7 +41,7 @@ fun SaleListScreen(
     }
 
     Scaffold(
-        topBar = { TopBar(title = "Vendas", onBack = {}) },
+        topBar = { TopBar(title = "Vendas", onBack = { goBack() }) },
         snackbarHost = { SnackbarHost(hostState = snackbarHostState) { data ->
             Snackbar(snackbarData = data, containerColor = snackColor)
         }},
