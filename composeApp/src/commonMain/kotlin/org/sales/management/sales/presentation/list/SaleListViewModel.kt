@@ -15,7 +15,7 @@ import org.sales.management.sales.domain.model.saleitem.SaleItemRequestDTO
 import org.sales.management.sales.domain.repository.SaleRepository
 
 class SaleListViewModel(
-    private val saleRepo: SaleRepository
+    private val repository: SaleRepository
 ) : ViewModel() {
 
     private val _salesState = MutableStateFlow<List<SaleResponse>>(emptyList())
@@ -28,7 +28,7 @@ class SaleListViewModel(
 
     fun loadSales() {
         viewModelScope.launch {
-            saleRepo.getSales().collect { res ->
+            repository.getSales().collect { res ->
                 res.onSuccess { _salesState.value = it }
                     .onFailure { _eventFlow.emit(SnackbarEvent("Erro: ${it.message}", true)) }
             }
@@ -46,7 +46,7 @@ class SaleListViewModel(
                     SaleItemRequestDTO(item.productId, item.quantity, item.unitPrice)
                 }
             )
-            saleRepo.updateSale(req).collect { result ->
+            repository.updateSale(req).collect { result ->
                 result.onSuccess {
                     _eventFlow.emit(SnackbarEvent("Status atualizado", false))
                     loadSales()

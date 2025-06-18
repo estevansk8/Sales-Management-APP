@@ -25,7 +25,7 @@ import org.sales.management.sales.data.remote.SaleService
 import org.sales.management.sales.data.repositories.SaleRepositoryImpl
 import org.sales.management.sales.domain.repository.SaleRepository
 import org.sales.management.sales.presentation.form.SaleFormsViewModel
-
+import org.sales.management.sales.presentation.list.SaleListViewModel
 
 
 private val dataModule = module {
@@ -140,6 +140,12 @@ private val viewModelModule = module {
             saleRepository = get(),
             clientRepository = get(),
             productRepository = get()
+        )
+    }
+
+    viewModel {
+        SaleListViewModel(
+            repository = get()
         )
     }
 
