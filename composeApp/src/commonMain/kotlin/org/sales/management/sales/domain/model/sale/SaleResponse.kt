@@ -1,7 +1,9 @@
 package org.sales.management.sales.domain.model.sale
 
+import com.ionspin.kotlin.bignum.decimal.BigDecimal
 import kotlinx.datetime.LocalDate
 import kotlinx.datetime.LocalDateTime
+import kotlinx.serialization.Contextual
 import kotlinx.serialization.Serializable
 import org.sales.management.sales.domain.model.saleitem.SaleItemResponseDTO
 

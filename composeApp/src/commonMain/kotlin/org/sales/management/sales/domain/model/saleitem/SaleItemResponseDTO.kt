@@ -5,8 +5,8 @@ import kotlinx.serialization.Serializable
 @Serializable
 data class SaleItemResponseDTO(
     val productId: Long,
-    val name: String,
-    val unitPrice: String,
+    val productName: String,
     val quantity: Int,
+    val unitPrice: String,
     val subtotal: String
 )
