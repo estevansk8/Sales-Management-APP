@@ -104,34 +104,43 @@ class SaleFormsViewModel(
 
     fun onSubmitSale() {
         val currentState = _uiState.value
-        if (currentState.selectedClient == null || currentState.saleItems.isEmpty()) return
+        if (currentState.selectedClient == null || currentState.saleItems.isEmpty()){
+            viewModelScope.launch {
+                _eventFlow.emit(SnackbarEvent("Cliente e itens são obrigatórios", true))
+            }
+
+            return
+        }
 
         _uiState.update { it.copy(isSubmitting = true) }
 
         viewModelScope.launch {
-            try {
-                val saleRequest = SaleRequestDTO(
-                    clientId = currentState.selectedClient.id.toLong(),
-                    saleDate = Clock.System.now().toLocalDateTime(TimeZone.currentSystemDefault()).date,
-                    status = SaleStatus.PENDING,
-                    dueDate = currentState.dueDate,
-                    items = currentState.saleItems.map {
-                        SaleItemRequestDTO(
-                            productId = it.productId,
-                            quantity = it.quantity,
-                            unitPrice = it.unitPrice.toPlainString()
-                        )
+
+            val saleRequest = SaleRequestDTO(
+                clientId = currentState.selectedClient.id.toLong(),
+                saleDate = Clock.System.now().toLocalDateTime(TimeZone.currentSystemDefault()).date,
+                status = SaleStatus.PENDING,
+                dueDate = currentState.dueDate,
+                items = currentState.saleItems.map {
+                    SaleItemRequestDTO(
+                        productId = it.productId,
+                        quantity = it.quantity,
+                        unitPrice = it.unitPrice.toPlainString()
+                    )
+                }
+            )
+
+            viewModelScope.launch {
+                saleRepository.createSale(saleRequest).collect { result ->
+                    result.onSuccess {
+                        _eventFlow.emit(SnackbarEvent("Venda criada com sucesso", false))
+                        _uiState.update { SaleFormUiState() }
+                    }.onFailure { e ->
+                        _eventFlow.emit(SnackbarEvent("Erro: ${e.message}", true))
+                        _uiState.update { it.copy(isSubmitting = false) }
                     }
-                )
-
-                // Simule chamada de API aqui
-                saleRepository.createSale(saleRequest)
-
-                _uiState.update { SaleFormUiState() } // Reset form
-            } catch (e: Exception) {
-                _uiState.update { it.copy(isSubmitting = false, submissionError = e.message) }
+                }
             }
         }
-
     }
 }

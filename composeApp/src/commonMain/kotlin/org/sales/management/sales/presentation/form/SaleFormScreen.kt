@@ -19,9 +19,16 @@ import androidx.compose.foundation.lazy.items
 import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.filled.CalendarMonth
 import androidx.compose.material3.Icon
+import androidx.compose.material3.Snackbar
+import androidx.compose.material3.SnackbarHost
+import androidx.compose.material3.SnackbarHostState
 import androidx.compose.material3.Text
+import androidx.compose.runtime.LaunchedEffect
 import androidx.compose.runtime.collectAsState
 import androidx.compose.runtime.getValue
+import androidx.compose.runtime.mutableStateOf
+import androidx.compose.runtime.remember
+import androidx.compose.runtime.setValue
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.text.font.FontWeight
@@ -44,6 +51,16 @@ fun SaleFormScreen(
 
     val uiState by viewModel.uiState.collectAsState()
 
+    val snackbarHostState = remember { SnackbarHostState() }
+    var snackbarColor by remember { mutableStateOf(Color.Unspecified) }
+
+    LaunchedEffect(Unit) {
+        viewModel.eventFlow.collect { event ->
+            snackbarColor = if (event.isError) Color(0xFFD32F2F) else Color(0xFF388E3C)
+            snackbarHostState.showSnackbar(event.message)
+        }
+    }
+
     Scaffold(
         topBar = {
             TopBar(
@@ -57,6 +74,14 @@ fun SaleFormScreen(
                 onSubmit = viewModel::onSubmitSale,
                 isSubmitting = false
             )
+        },
+        snackbarHost = {
+            SnackbarHost(hostState = snackbarHostState) { data ->
+                Snackbar(
+                    snackbarData = data,
+                    containerColor = snackbarColor
+                )
+            }
         }
     ) { paddingValues ->
         LazyColumn(
@@ -85,18 +110,6 @@ fun SaleFormScreen(
                         modifier = Modifier.weight(1f)
                     )
 
-//                    Box(
-//                        modifier = Modifier
-//                            .size(48.dp)
-//                            .background(Color.Transparent),
-//                        contentAlignment = Alignment.Center
-//                    ){
-//                        Icon(
-//                            imageVector = Icons.Default.CalendarMonth,
-//                            contentDescription = "Calendar",
-//                            tint = Color.Black,
-//                        )
-//                    }
                 }
 
             }
