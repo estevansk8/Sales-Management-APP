@@ -46,15 +46,17 @@ class SaleService(
         }
     }
 
-    suspend fun getSales() {
+    suspend fun getSales(): List<SaleResponse> {
         val response = httpClient.get(baseUrl)
         when (response.status) {
             HttpStatusCode.OK -> {
                 val api = response.body<ApiResponseDTO<List<SaleResponse>>>()
-                if (api.data == null || !api.success) {
+                if (!api.success || api.data == null) {
                     throw Exception(api.message)
                 }
+                return api.data
+            }
+            else -> throw Exception("Erro ao obter vendas: ${response.status}")
         }
-            else -> throw Exception("Erro ao obter vendas: ${response.status}") }
     }
 }

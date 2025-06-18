@@ -4,6 +4,7 @@ import kotlinx.coroutines.flow.Flow
 import kotlinx.coroutines.flow.flow
 import org.sales.management.sales.data.remote.SaleService
 import org.sales.management.sales.domain.model.sale.SaleRequestDTO
+import org.sales.management.sales.domain.model.sale.SaleResponse
 import org.sales.management.sales.domain.repository.SaleRepository
 
 class SaleRepositoryImpl(
@@ -28,10 +29,10 @@ class SaleRepositoryImpl(
         }
     }
 
-    override fun getSales(): Flow<Result<Unit>> = flow {
+    override fun getSales(): Flow<Result<List<SaleResponse>>> = flow {
         try {
-            saleService.getSales()
-            emit(Result.success(Unit))
+            val list = saleService.getSales()
+            emit(Result.success(list))
         } catch (e: Exception) {
             emit(Result.failure(e))
         }
