@@ -4,6 +4,7 @@ import com.ionspin.kotlin.bignum.decimal.BigDecimal
 import kotlinx.datetime.LocalDate
 import org.sales.management.clients.domain.model.Client
 import org.sales.management.products.domain.model.Product
+import org.sales.management.sales.domain.model.saleitem.SaleItem
 
 data class SaleFormUiState(
     // Campos do formulário

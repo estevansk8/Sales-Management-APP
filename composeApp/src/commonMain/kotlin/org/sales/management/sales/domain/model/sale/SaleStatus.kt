@@ -1,4 +1,4 @@
-package org.sales.management.sales.domain.model
+package org.sales.management.sales.domain.model.sale
 
 import kotlinx.serialization.Serializable
 

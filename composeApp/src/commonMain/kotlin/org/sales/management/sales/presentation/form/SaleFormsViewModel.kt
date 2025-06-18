@@ -3,8 +3,10 @@ package org.sales.management.sales.presentation.form
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import com.ionspin.kotlin.bignum.decimal.toBigDecimal
+import kotlinx.coroutines.flow.MutableSharedFlow
 import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.flow.StateFlow
+import kotlinx.coroutines.flow.asSharedFlow
 import kotlinx.coroutines.flow.asStateFlow
 import kotlinx.coroutines.flow.update
 import kotlinx.coroutines.launch
@@ -14,20 +16,24 @@ import kotlinx.datetime.TimeZone
 import kotlinx.datetime.toLocalDateTime
 import org.sales.management.clients.domain.model.Client
 import org.sales.management.clients.domain.repository.ClientRepository
+import org.sales.management.core.ui.SnackbarEvent
 import org.sales.management.products.domain.model.Product
 import org.sales.management.products.domain.repository.ProductRepository
 import org.sales.management.sales.domain.model.SaleFormUiState
-import org.sales.management.sales.domain.model.SaleRequestDTO
+import org.sales.management.sales.domain.model.sale.SaleRequestDTO
 import org.sales.management.sales.domain.repository.SaleRepository
-import org.sales.management.sales.domain.model.SaleItem
-import org.sales.management.sales.domain.model.SaleItemRequestDTO
-import org.sales.management.sales.domain.model.SaleStatus
+import org.sales.management.sales.domain.model.saleitem.SaleItem
+import org.sales.management.sales.domain.model.saleitem.SaleItemRequestDTO
+import org.sales.management.sales.domain.model.sale.SaleStatus
 
 class SaleFormsViewModel(
     private val saleRepository: SaleRepository,
     private val productRepository: ProductRepository,
     private val clientRepository: ClientRepository
 ) : ViewModel() {
+
+    private val _eventFlow = MutableSharedFlow<SnackbarEvent>()
+    val eventFlow = _eventFlow.asSharedFlow()
 
     private val _uiState = MutableStateFlow(SaleFormUiState())
     val uiState: StateFlow<SaleFormUiState> = _uiState.asStateFlow()

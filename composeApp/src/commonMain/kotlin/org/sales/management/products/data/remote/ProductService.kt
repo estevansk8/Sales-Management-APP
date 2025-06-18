@@ -9,8 +9,7 @@ import io.ktor.client.request.post
 import io.ktor.client.request.setBody
 import io.ktor.client.statement.HttpResponse
 import io.ktor.http.HttpStatusCode
-import org.sales.management.clients.domain.model.ClientDTO
-import org.sales.management.core.data.remote.ktor.ApiConstants
+import org.sales.management.core.data.remote.ApiConstants
 import org.sales.management.products.domain.model.Product
 import org.sales.management.products.domain.model.ProductResponse
 import org.sales.management.products.domain.model.ProductRequest

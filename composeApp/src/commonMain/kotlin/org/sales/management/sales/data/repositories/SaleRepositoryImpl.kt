@@ -1,24 +1,30 @@
 package org.sales.management.sales.data.repositories
 
 import kotlinx.coroutines.flow.Flow
-import org.sales.management.clients.domain.model.Client
-import org.sales.management.products.domain.model.Product
+import kotlinx.coroutines.flow.flow
 import org.sales.management.sales.data.remote.SaleService
-import org.sales.management.sales.domain.model.SaleRequestDTO
+import org.sales.management.sales.domain.model.sale.SaleRequestDTO
 import org.sales.management.sales.domain.repository.SaleRepository
 
 class SaleRepositoryImpl(
     private val saleService: SaleService
 ): SaleRepository {
-    override suspend fun searchProducts(name: String): Flow<Result<List<Product>>> {
-        TODO("Not yet implemented")
+
+    override fun createSale(request: SaleRequestDTO): Flow<Result<Unit>> = flow {
+        try {
+            saleService.createSale(request)
+            emit(Result.success(Unit))
+        } catch (e: Exception) {
+            emit(Result.failure(e))
+        }
     }
 
-    override suspend fun getClients(): Flow<Result<List<Client>>> {
-        TODO("Not yet implemented")
-    }
-
-    override suspend fun createSale(saleRequest: SaleRequestDTO): Flow<Result<Unit>> {
-        TODO("Not yet implemented")
+    override fun updateSale(request: SaleRequestDTO): Flow<Result<Unit>> = flow {
+        try {
+            saleService.updateSale(request)
+            emit(Result.success(Unit))
+        } catch (e: Exception) {
+            emit(Result.failure(e))
+        }
     }
 }

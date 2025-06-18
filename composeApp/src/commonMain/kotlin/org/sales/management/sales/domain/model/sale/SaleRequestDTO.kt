@@ -1,8 +1,8 @@
-package org.sales.management.sales.domain.model
+package org.sales.management.sales.domain.model.sale
 
 import kotlinx.datetime.LocalDate
 import kotlinx.serialization.Serializable
-import org.sales.management.products.domain.model.ProductRequest
+import org.sales.management.sales.domain.model.saleitem.SaleItemRequestDTO
 
 @Serializable
 data class SaleRequestDTO(

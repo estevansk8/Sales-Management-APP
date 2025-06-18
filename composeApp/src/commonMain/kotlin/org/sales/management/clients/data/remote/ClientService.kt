@@ -12,7 +12,7 @@ import org.sales.management.clients.domain.model.Client
 import org.sales.management.clients.domain.model.ClientRequest
 import org.sales.management.clients.domain.model.ClientDTO
 import org.sales.management.clients.domain.model.ClientsResponse
-import org.sales.management.core.data.remote.ktor.ApiConstants
+import org.sales.management.core.data.remote.ApiConstants
 
 class ClientService (
     private val httpClient: HttpClient
