@@ -64,6 +64,9 @@ fun NavHost(
                 goToProducts = {
                     navController.navigate(ProductsListScreen)
                 },
+                goToSales = {
+                    navController.navigate(SaleListScreen)
+                },
                 onExit = {
                     navController.navigate(LoginScreen){
                         popUpTo(LoginScreen) { inclusive = true }

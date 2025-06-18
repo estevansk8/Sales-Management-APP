@@ -54,6 +54,7 @@ fun HomeScreen(
     goMakeSale : () -> Unit,
     goToClients : () -> Unit,
     goToProducts : () -> Unit,
+    goToSales : () -> Unit,
     onExit: () -> Unit,
     viewModel: HomeViewModel = koinViewModel()
 ){
@@ -64,7 +65,7 @@ fun HomeScreen(
     val listofFeatures = listOf(
         Feature(Icons.Default.People,"Clientes", goToClients),
         Feature(Icons.Default.Inventory2,"Produtos", goToProducts),
-        Feature(Icons.Default.ShoppingCart,"Vendas", {  }),
+        Feature(Icons.Default.ShoppingCart,"Vendas", goToSales),
         Feature(Icons.Default.Money,"Gastos", {  }),
     )
 
