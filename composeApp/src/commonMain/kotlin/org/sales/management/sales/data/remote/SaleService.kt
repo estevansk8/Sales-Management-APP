@@ -12,44 +12,35 @@ import org.sales.management.sales.domain.model.sale.Sale
 import org.sales.management.sales.domain.model.sale.SaleRequestDTO
 import org.sales.management.sales.domain.model.sale.SaleResponse
 import io.ktor.client.statement.bodyAsText
+import org.sales.management.core.data.remote.ApiResponseDTO
 
 class SaleService(
     private val httpClient: HttpClient
 ) {
     private val baseUrl = "${ApiConstants.BASE_URL}/sales"
 
-    suspend fun createSale(saleRequest: SaleRequestDTO): SaleResponse<Sale> {
-        val response: HttpResponse = httpClient.post(baseUrl) {
-            setBody(saleRequest)
+    suspend fun createSale(request: SaleRequestDTO) {
+        val response = httpClient.post(baseUrl) { setBody(request) }
+        when (response.status) {
+            HttpStatusCode.Created, HttpStatusCode.OK -> {
+                val api = response.body<ApiResponseDTO<SaleResponse>>()
+                if (api.data == null || !api.success) {
+                    throw Exception(api.message)
+                }
+            }
+            else -> throw Exception("Erro ao registrar venda: ${response.status}")
         }
-
-        if (response.status.value !in 200..299) {
-            val errorBody: String = response.bodyAsText()
-            throw Exception("Erro ${response.status.value}: $errorBody")
-        }
-
-        val apiResponse: SaleResponse<Sale> = response.body()
-
-        if (!apiResponse.success || apiResponse.data == null) {
-            throw Exception(apiResponse.message)
-        }
-
-        return apiResponse
     }
 
-    suspend fun updateSale(sale: SaleRequestDTO) {
-        val response = httpClient.put(baseUrl) {
-            setBody(sale)
-        }
-
+    suspend fun updateSale(request: SaleRequestDTO) {
+        val response = httpClient.put(baseUrl) { setBody(request) }
         when (response.status) {
             HttpStatusCode.OK -> {
-                val res: SaleResponse<Sale> = response.body()
-                if (!res.success) throw Exception(res.message)
+                val api = response.body<ApiResponseDTO<SaleResponse>>()
+                if (api.data == null || !api.success) {
+                    throw Exception(api.message)
+                }
             }
-
             else -> throw Exception("Erro ao atualizar venda: ${response.status}")
         }
-    }
-
-}
+    }}
