@@ -2,6 +2,7 @@ package org.sales.management.sales.data.remote
 
 import io.ktor.client.HttpClient
 import io.ktor.client.call.body
+import io.ktor.client.request.get
 import io.ktor.client.request.post
 import io.ktor.client.request.put
 import io.ktor.client.request.setBody
@@ -43,4 +44,17 @@ class SaleService(
             }
             else -> throw Exception("Erro ao atualizar venda: ${response.status}")
         }
-    }}
+    }
+
+    suspend fun getSales() {
+        val response = httpClient.get(baseUrl)
+        when (response.status) {
+            HttpStatusCode.OK -> {
+                val api = response.body<ApiResponseDTO<List<SaleResponse>>>()
+                if (api.data == null || !api.success) {
+                    throw Exception(api.message)
+                }
+        }
+            else -> throw Exception("Erro ao obter vendas: ${response.status}") }
+    }
+}
