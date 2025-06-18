@@ -27,4 +27,13 @@ class SaleRepositoryImpl(
             emit(Result.failure(e))
         }
     }
+
+    override fun getSales(): Flow<Result<Unit>> = flow {
+        try {
+            saleService.getSales()
+            emit(Result.success(Unit))
+        } catch (e: Exception) {
+            emit(Result.failure(e))
+        }
+    }
 }
