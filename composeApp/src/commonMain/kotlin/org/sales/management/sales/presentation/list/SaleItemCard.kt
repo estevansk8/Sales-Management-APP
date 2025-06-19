@@ -45,7 +45,7 @@ fun SaleItemCard(
             Icon(icon, contentDescription = null, tint = MaterialTheme.colorScheme.primary)
             Spacer(Modifier.width(12.dp))
             Column(modifier = Modifier.weight(1f)) {
-                Text("Cliente: ${sale.clientName}", fontWeight = FontWeight.Bold)
+                Text(text = sale.clientName, fontWeight = FontWeight.Bold)
                 Text("Total: R$ ${sale.totalAmount}", style = MaterialTheme.typography.bodyMedium)
                 Text("Data: ${sale.saleDate}", style = MaterialTheme.typography.bodySmall)
             }

@@ -1,9 +1,9 @@
-package org.sales.management.auth.domain.model
+package org.sales.management.auth.domain.model.create
 
 import kotlinx.serialization.Serializable
 
 @Serializable
-data class CreateUserResponse(
+data class SignUpUserResponse(
     val id: Long,
     val name: String,
     val email: String,

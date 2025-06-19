@@ -1,4 +1,4 @@
-package org.sales.management.auth.domain.model
+package org.sales.management.auth.domain.model.login
 
 import kotlinx.serialization.Serializable
 

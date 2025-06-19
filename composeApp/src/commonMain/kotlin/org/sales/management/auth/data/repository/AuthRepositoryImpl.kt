@@ -1,9 +1,10 @@
 package org.sales.management.auth.data.repository
 
 import org.sales.management.auth.data.remote.AuthService
-import org.sales.management.auth.domain.model.CreateUserResponse
-import org.sales.management.auth.domain.model.LoginUserRequest
-import org.sales.management.auth.domain.model.LoginUserResponse
+import org.sales.management.auth.domain.model.create.SignUpUserRequest
+import org.sales.management.auth.domain.model.create.SignUpUserResponse
+import org.sales.management.auth.domain.model.login.LoginUserRequest
+import org.sales.management.auth.domain.model.login.LoginUserResponse
 import org.sales.management.auth.domain.repository.AuthRepository
 
 
@@ -14,7 +15,7 @@ class AuthRepositoryImpl(
         return service.login(loginUserRequest)
     }
 
-    override suspend fun signUp(name: String, email: String, password: String): CreateUserResponse {
-        TODO("Not yet implemented")
+    override suspend fun signUp(signUpUserRequest: SignUpUserRequest): SignUpUserResponse {
+        return service.signUp(signUpUserRequest)
     }
 }

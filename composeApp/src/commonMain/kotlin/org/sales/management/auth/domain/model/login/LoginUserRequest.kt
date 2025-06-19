@@ -1,10 +1,9 @@
-package org.sales.management.auth.domain.model
+package org.sales.management.auth.domain.model.login
 
 import kotlinx.serialization.Serializable
 
 @Serializable
-data class CreateUserRequest(
-    val name: String,
+data class LoginUserRequest(
     val email: String,
     val password: String,
 )
