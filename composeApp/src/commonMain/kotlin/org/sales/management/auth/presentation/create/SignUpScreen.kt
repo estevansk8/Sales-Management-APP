@@ -23,7 +23,7 @@ import org.jetbrains.compose.resources.painterResource
 import org.sales.management.core.ui.composables.FormsButton
 
 @Composable
-fun CreateUserScreen(
+fun SignUpScreen(
     onLogin: () -> Unit
 ) {
     Column(
