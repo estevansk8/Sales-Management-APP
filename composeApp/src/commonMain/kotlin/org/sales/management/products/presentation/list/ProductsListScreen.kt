@@ -1,9 +1,11 @@
 package org.sales.management.products.presentation.list
 
+import androidx.compose.foundation.Image
 import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.padding
+import androidx.compose.foundation.layout.size
 import androidx.compose.foundation.lazy.LazyColumn
 import androidx.compose.foundation.lazy.items
 import androidx.compose.material.Divider
@@ -19,7 +21,12 @@ import androidx.compose.runtime.Composable
 import androidx.compose.runtime.LaunchedEffect
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
+import androidx.compose.ui.text.font.FontWeight
+import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.unit.dp
+import managementsalesapp.composeapp.generated.resources.Res
+import managementsalesapp.composeapp.generated.resources.img
+import org.jetbrains.compose.resources.painterResource
 import org.koin.compose.viewmodel.koinViewModel
 import org.sales.management.core.ui.composables.TopBar
 
@@ -70,10 +77,24 @@ fun ProductsListScreen(
                 )
             }
         } else if(viewModel.products.isEmpty()){
-            Box(modifier = Modifier.fillMaxSize(), contentAlignment = Alignment.Center) {
-
-                Column(horizontalAlignment = Alignment.CenterHorizontally) {
-                    Text(text = "Nenhum produto encontrado!")
+            Box(
+                modifier = Modifier.fillMaxSize(),
+                contentAlignment = Alignment.Center,
+            ) {
+                Column(
+                    horizontalAlignment = Alignment.CenterHorizontally
+                ) {
+                    Image(
+                        painter = painterResource(Res.drawable.img),
+                        contentDescription = null,
+                        modifier = Modifier.size(200.dp)
+                    )
+                    Text(
+                        text = "Nenhum produto adicionado.",
+                        fontWeight = FontWeight.Bold,
+                        textAlign = TextAlign.Center,
+                        modifier = Modifier.padding(top = 20.dp)
+                    )
                 }
             }
         } else {

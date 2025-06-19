@@ -1,5 +1,6 @@
 package org.sales.management.sales.presentation.list
 
+import androidx.compose.foundation.Image
 import androidx.compose.material3.SnackbarHostState
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.LaunchedEffect
@@ -15,9 +16,22 @@ import androidx.compose.material3.Snackbar
 import androidx.compose.material3.SnackbarHost
 import org.sales.management.core.ui.composables.TopBar
 import androidx.compose.foundation.layout.Arrangement
+import androidx.compose.foundation.layout.Box
+import androidx.compose.foundation.layout.Column
+import androidx.compose.foundation.layout.fillMaxSize
+import androidx.compose.foundation.layout.padding
+import androidx.compose.foundation.layout.size
 import androidx.compose.foundation.lazy.LazyColumn
 import androidx.compose.ui.unit.dp
 import androidx.compose.foundation.lazy.items
+import androidx.compose.material3.Text
+import androidx.compose.ui.Alignment
+import androidx.compose.ui.Modifier
+import androidx.compose.ui.text.font.FontWeight
+import androidx.compose.ui.text.style.TextAlign
+import managementsalesapp.composeapp.generated.resources.Res
+import managementsalesapp.composeapp.generated.resources.img
+import org.jetbrains.compose.resources.painterResource
 import org.sales.management.sales.presentation.list.SaleItemCard
 import org.sales.management.sales.presentation.list.SaleListViewModel
 
@@ -46,19 +60,44 @@ fun SaleListScreen(
             Snackbar(snackbarData = data, containerColor = snackColor)
         }},
     ) { padding ->
-        LazyColumn(
-            contentPadding = padding,
-            verticalArrangement = Arrangement.spacedBy(4.dp)
-        ) {
-            items(sales) { sale ->
-                SaleItemCard(
-                    sale = sale,
-                    onClick = { goToDetail(sale.id) },
-                    onChangeStatus = { newStatus ->
-                        viewModel.updateStatus(sale, newStatus)
-                    }
-                )
+        if (sales.isEmpty()) {
+            Box(
+                modifier = Modifier.fillMaxSize(),
+                contentAlignment = Alignment.Center,
+            ) {
+                Column(
+                    horizontalAlignment = Alignment.CenterHorizontally
+                ) {
+                    Image(
+                        painter = painterResource(Res.drawable.img),
+                        contentDescription = null,
+                        modifier = Modifier.size(200.dp)
+                    )
+                    Text(
+                        text = "Nenhuma venda feita.",
+                        fontWeight = FontWeight.Bold,
+                        textAlign = TextAlign.Center,
+                        modifier = Modifier.padding(top = 20.dp)
+                    )
+                }
             }
         }
+        else{
+            LazyColumn(
+                contentPadding = padding,
+                verticalArrangement = Arrangement.spacedBy(4.dp)
+            ) {
+                items(sales) { sale ->
+                    SaleItemCard(
+                        sale = sale,
+                        onClick = { goToDetail(sale.id) },
+                        onChangeStatus = { newStatus ->
+                            viewModel.updateStatus(sale, newStatus)
+                        }
+                    )
+                }
+            }
+        }
+
     }
 }
