@@ -30,7 +30,7 @@ import org.sales.management.sales.presentation.list.SaleListViewModel
 
 
 private val dataModule = module {
-    single<AuthService>{
+    factory<AuthService>{
         AuthService(
             httpClient = buildHttpClient(
                 dataStore = get(),
@@ -39,13 +39,13 @@ private val dataModule = module {
         )
     }
 
-    single<AuthRepository> {
+    factory<AuthRepository> {
         AuthRepositoryImpl(
             service = get()
         )
     }
 
-    single<ClientService> {
+    factory<ClientService> {
         ClientService(
             httpClient = buildHttpClient(
                 dataStore = get(),
@@ -54,13 +54,13 @@ private val dataModule = module {
         )
     }
 
-    single<ClientRepository> {
+    factory<ClientRepository> {
         ClientRepositoryImpl(
             service = get()
         )
     }
 
-    single<ProductService> {
+    factory<ProductService> {
         ProductService(
             httpClient = buildHttpClient(
                 dataStore = get(),
@@ -69,19 +69,19 @@ private val dataModule = module {
         )
     }
 
-    single<ProductRepository> {
+    factory<ProductRepository> {
         ProductRepositoryImpl(
             service = get()
         )
     }
 
-    single<SaleRepository> {
+    factory<SaleRepository> {
         SaleRepositoryImpl(
             saleService = get()
         )
     }
 
-    single<SaleService> {
+    factory<SaleService> {
         SaleService(
             httpClient = buildHttpClient(
                 dataStore = get(),
