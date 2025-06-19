@@ -26,7 +26,15 @@ class SignUpViewModel(
         return repository.signUp(signUpUser)
     }
 
-    fun signUp( name: String, email: String, password: String){
+    fun signUp( name: String, email: String, password: String, passwordConfirm: String){
+
+        if (password != passwordConfirm || password.length < 6 ) {
+            viewModelScope.launch {
+                _eventFlow.emit(SnackbarEvent("As senhas não coincidem!", true))
+            }
+            return
+        }
+
         viewModelScope.launch(Dispatchers.Default) {
             isLoading = true
             try {

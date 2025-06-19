@@ -48,8 +48,8 @@ fun NavHost(
         }
         composable<SignUpScreen>{
             SignUpScreen(
-                onLogin = {
-                    navController.navigate(HomeScreen)
+                onBack = {
+                    navController.navigate(LoginScreen)
                 }
             )
         }
