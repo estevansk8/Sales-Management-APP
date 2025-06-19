@@ -29,7 +29,7 @@ import org.sales.management.sales.domain.model.sale.SaleStatus
 fun SaleItemCard(
     sale: SaleResponse,
     onClick: () -> Unit,
-    onChangeStatus: (SaleStatus) -> Unit
+    onRequestPayment: (SaleResponse) -> Unit
 ) {
     val icon = if (sale.status == SaleStatus.PENDING) Icons.Default.HourglassEmpty else Icons.Default.CheckCircle
 
@@ -49,11 +49,10 @@ fun SaleItemCard(
                 Text("Total: R$ ${sale.totalAmount}", style = MaterialTheme.typography.bodyMedium)
                 Text("Data: ${sale.saleDate}", style = MaterialTheme.typography.bodySmall)
             }
-            Button(onClick = {
-                val target = if (sale.status == SaleStatus.PENDING) SaleStatus.PAID else SaleStatus.PENDING
-                onChangeStatus(target)
-            }) {
-                Text(if (sale.status == SaleStatus.PENDING) "Marcar Pago" else "Marcar Pendente")
+            if (sale.status == SaleStatus.PENDING) {
+                Button(onClick = { onRequestPayment(sale) }) {
+                    Text("Receber")
+                }
             }
         }
     }

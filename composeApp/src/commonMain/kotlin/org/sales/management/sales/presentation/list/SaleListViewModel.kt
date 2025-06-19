@@ -35,20 +35,11 @@ class SaleListViewModel(
         }
     }
 
-    fun updateStatus(sale: SaleResponse, newStatus: SaleStatus) {
+    fun updateStatus(saleId: Long, newStatus: SaleStatus) {
         viewModelScope.launch {
-            val req = SaleRequestDTO(
-                clientId = sale.clientId,
-                saleDate = sale.saleDate,
-                status = newStatus,
-                dueDate = sale.dueDate,
-                items = sale.items.map { item ->
-                    SaleItemRequestDTO(item.productId, item.quantity, item.unitPrice)
-                }
-            )
-            repository.updateSale(req).collect { result ->
+            repository.updateSaleStatus(saleId, newStatus).collect { result ->
                 result.onSuccess {
-                    _eventFlow.emit(SnackbarEvent("Status atualizado", false))
+                    _eventFlow.emit(SnackbarEvent("Pagamento confirmado", false))
                     loadSales()
                 }.onFailure {
                     _eventFlow.emit(SnackbarEvent("Erro ao atualizar: ${it.message}", true))
