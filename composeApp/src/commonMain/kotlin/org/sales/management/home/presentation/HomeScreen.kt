@@ -225,9 +225,11 @@ fun HomeScreen(
                     }
                 }
 
+                Spacer(modifier = Modifier.height(12.dp))
+
                 Box(
                     modifier = Modifier.fillMaxSize(),
-                    contentAlignment = Alignment.Center,
+                    contentAlignment = Alignment.TopCenter,
                 ) {
                     Column(
                         horizontalAlignment = Alignment.CenterHorizontally

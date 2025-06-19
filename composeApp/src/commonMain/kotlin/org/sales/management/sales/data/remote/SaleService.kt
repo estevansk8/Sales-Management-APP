@@ -14,6 +14,8 @@ import org.sales.management.sales.domain.model.sale.SaleRequestDTO
 import org.sales.management.sales.domain.model.sale.SaleResponse
 import io.ktor.client.statement.bodyAsText
 import org.sales.management.core.data.remote.ApiResponseDTO
+import org.sales.management.sales.domain.model.sale.SaleStatus
+import org.sales.management.sales.domain.model.sale.SaleStatusUpdateRequest
 
 class SaleService(
     private val httpClient: HttpClient
@@ -43,6 +45,23 @@ class SaleService(
                 }
             }
             else -> throw Exception("Erro ao atualizar venda: ${response.status}")
+        }
+    }
+
+    suspend fun updateSaleStatus(saleId: Long, newStatus: SaleStatus) {
+        val url = "$baseUrl/$saleId/status"
+        val response = httpClient.put(url) {
+            setBody(SaleStatusUpdateRequest(newStatus))
+        }
+
+        when (response.status) {
+            HttpStatusCode.OK -> {
+                val api = response.body<ApiResponseDTO<SaleResponse>>()
+                if (api.data == null || !api.success) {
+                    throw Exception(api.message)
+                }
+            }
+            else -> throw Exception("Erro ao atualizar status da venda: ${response.status}")
         }
     }
 
