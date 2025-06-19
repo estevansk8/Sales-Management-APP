@@ -42,11 +42,11 @@ fun NavHost(
                     navController.navigate(HomeScreen)
                 },
                 onSignUp = {
-                    navController.navigate(CreateUserScreen)
+                    navController.navigate(SignUpScreen)
                 }
             )
         }
-        composable<CreateUserScreen>{
+        composable<SignUpScreen>{
             SignUpScreen(
                 onLogin = {
                     navController.navigate(HomeScreen)

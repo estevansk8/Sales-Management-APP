@@ -9,7 +9,7 @@ object SplashScreen
 object LoginScreen
 
 @Serializable
-object CreateUserScreen
+object SignUpScreen
 
 @Serializable
 object HomeScreen
