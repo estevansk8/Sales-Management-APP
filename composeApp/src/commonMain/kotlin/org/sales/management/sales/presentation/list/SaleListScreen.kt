@@ -1,6 +1,7 @@
 package org.sales.management.sales.presentation.list
 
 import androidx.compose.foundation.Image
+import androidx.compose.foundation.background
 import androidx.compose.foundation.clickable
 import androidx.compose.material3.SnackbarHostState
 import androidx.compose.runtime.Composable
@@ -19,15 +20,22 @@ import org.sales.management.core.ui.composables.TopBar
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.Column
+import androidx.compose.foundation.layout.Row
+import androidx.compose.foundation.layout.Spacer
 import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.layout.size
+import androidx.compose.foundation.layout.width
 import androidx.compose.foundation.lazy.LazyColumn
 import androidx.compose.ui.unit.dp
 import androidx.compose.foundation.lazy.items
 import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.material.AlertDialog
+import androidx.compose.material.icons.Icons
+import androidx.compose.material.icons.filled.CreditCard
+import androidx.compose.material.icons.filled.Payment
+import androidx.compose.material.icons.filled.QrCode
 import androidx.compose.material3.Text
 import androidx.compose.material3.TextButton
 import androidx.compose.ui.Alignment
@@ -39,8 +47,10 @@ import managementsalesapp.composeapp.generated.resources.img
 import org.jetbrains.compose.resources.painterResource
 import org.sales.management.sales.domain.model.sale.SaleResponse
 import org.sales.management.sales.domain.model.sale.SaleStatus
-import org.sales.management.sales.presentation.list.SaleItemCard
-import org.sales.management.sales.presentation.list.SaleListViewModel
+import androidx.compose.material3.Icon
+import androidx.compose.material3.MaterialTheme
+import androidx.compose.ui.draw.clip
+
 
 
 
@@ -72,22 +82,46 @@ fun SaleListScreen(
     ) { padding ->
         showPaymentDialog?.let { sale ->
             AlertDialog(
-                shape = RoundedCornerShape(8.dp),
                 onDismissRequest = { showPaymentDialog = null },
-                title = { Text(text="Forma de Pagamento:") },
+                shape = RoundedCornerShape(12.dp),
+                title = {
+                    Text(
+                        text = "Selecione a forma de pagamento:",
+                        style = MaterialTheme.typography.titleMedium,
+                        fontWeight = FontWeight.Bold
+                    )
+                },
                 text = {
-                    Column(verticalArrangement = Arrangement.spacedBy(8.dp)) {
-                        listOf("PIX", "Crédito", "Débito").forEach { type ->
-                            Text(
-                                text = type,
+                    Column(
+                        verticalArrangement = Arrangement.spacedBy(12.dp),
+                        modifier = Modifier.fillMaxWidth()
+                    ) {
+                        listOf(
+                            "PIX" to Icons.Default.QrCode,
+                            "Crédito" to Icons.Default.CreditCard,
+                            "Débito" to Icons.Default.Payment
+                        ).forEach { (label, icon) ->
+                            Row(
                                 modifier = Modifier
                                     .fillMaxWidth()
+                                    .clip(RoundedCornerShape(8.dp))
                                     .clickable {
                                         viewModel.updateStatus(sale.id, SaleStatus.PAID)
                                         showPaymentDialog = null
                                     }
-                                    .padding(8.dp)
-                            )
+                                    .background(MaterialTheme.colorScheme.surfaceVariant)
+                                    .padding(12.dp),
+                                verticalAlignment = Alignment.CenterVertically
+                            ) {
+                                Icon(
+                                    imageVector = icon,
+                                    contentDescription = label,
+                                    tint = MaterialTheme.colorScheme.primary,
+                                    modifier = Modifier.size(24.dp)
+                                )
+                                Spacer(modifier = Modifier.width(12.dp))
+                                Text(text = label, style = MaterialTheme.typography.bodyLarge)
+                            }
                         }
                     }
                 },
@@ -99,6 +133,7 @@ fun SaleListScreen(
                 }
             )
         }
+
 
         if (sales.isEmpty()) {
             Box(
