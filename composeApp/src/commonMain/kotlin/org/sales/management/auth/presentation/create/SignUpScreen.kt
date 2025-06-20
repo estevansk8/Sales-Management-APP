@@ -52,6 +52,7 @@ fun SignUpScreen(
     viewModel: SignUpViewModel = koinViewModel()
 ) {
 
+    var enterpriseName by remember { mutableStateOf("") }
     var name by remember { mutableStateOf("") }
     var email by remember { mutableStateOf("") }
     var password by remember { mutableStateOf("") }
@@ -108,8 +109,8 @@ fun SignUpScreen(
                 Spacer(modifier = Modifier.height(24.dp))
 
                 OutlinedTextField(
-                    value = "",
-                    onValueChange = {},
+                    value = enterpriseName,
+                    onValueChange = { enterpriseName = it },
                     label = { Text("Nome da empresa") },
                     modifier = Modifier.fillMaxWidth()
                 )

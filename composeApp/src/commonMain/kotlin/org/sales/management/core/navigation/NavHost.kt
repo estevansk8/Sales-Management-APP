@@ -15,6 +15,7 @@ import org.sales.management.products.presentation.list.ProductsListScreen
 import org.sales.management.reports.presentation.ReportsScreen
 import org.sales.management.sales.presentation.form.SaleFormScreen
 import org.sales.management.sales.presentation.list.SaleListScreen
+import org.sales.management.settings.presentation.SettingsScreen
 
 
 @Composable
@@ -85,6 +86,18 @@ fun NavHost(
         }
         composable<ReportsScreen>{
             ReportsScreen(
+                onTabSelected = { index ->
+                    when (index) {
+                        0 -> navController.navigate(HomeScreen)
+                        1 -> navController.navigate(ReportsScreen)
+                        2 -> navController.navigate(SettingsScreen)
+                        else -> {}
+                    }
+                }
+            )
+        }
+        composable<SettingsScreen>{
+            SettingsScreen(
                 onTabSelected = { index ->
                     when (index) {
                         0 -> navController.navigate(HomeScreen)
