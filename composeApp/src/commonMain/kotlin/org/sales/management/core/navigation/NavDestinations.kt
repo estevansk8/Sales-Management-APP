@@ -15,6 +15,12 @@ object SignUpScreen
 object HomeScreen
 
 @Serializable
+object ReportsScreen
+
+@Serializable
+object SettingsScreen
+
+@Serializable
 object ClientsListScreen
 
 @Serializable

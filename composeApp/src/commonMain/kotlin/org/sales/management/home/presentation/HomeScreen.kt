@@ -69,6 +69,7 @@ fun HomeScreen(
     goToClients : () -> Unit,
     goToProducts : () -> Unit,
     goToSales : () -> Unit,
+    onTabSelected: (Int) -> Unit,
     onExit: () -> Unit,
     viewModel: HomeViewModel = koinViewModel()
 ){
@@ -89,7 +90,10 @@ fun HomeScreen(
         bottomBar = {
             BottomBar(
                 selectedIndex = selectedTab,
-                onItemSelected = { selectedTab = it }
+                onItemSelected = {
+                    selectedTab = it
+                    onTabSelected(it)
+                }
             )
         },
     ){
