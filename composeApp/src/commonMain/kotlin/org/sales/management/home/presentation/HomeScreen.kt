@@ -14,6 +14,8 @@ import androidx.compose.foundation.layout.height
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.layout.size
 import androidx.compose.foundation.layout.width
+import androidx.compose.foundation.lazy.LazyColumn
+import androidx.compose.foundation.lazy.items
 import androidx.compose.foundation.rememberScrollState
 import androidx.compose.foundation.shape.CircleShape
 import androidx.compose.material.Divider
@@ -54,7 +56,11 @@ import managementsalesapp.composeapp.generated.resources.img
 import org.jetbrains.compose.resources.painterResource
 import org.koin.compose.viewmodel.koinViewModel
 import org.sales.management.core.ui.composables.BottomBar
+import org.sales.management.home.data.repositories.HomeMockRepositoryImpl
 import org.sales.management.home.domain.Feature
+import org.sales.management.products.presentation.list.ProductItem
+import org.sales.management.products.presentation.list.ProductListHeader
+import org.sales.management.home.presentation.itens.DashboardCardItem
 
 
 @Composable
@@ -76,6 +82,8 @@ fun HomeScreen(
         Feature(Icons.Default.ShoppingCart,"Vendas", goToSales),
         Feature(Icons.Default.Money,"Gastos", {  }),
     )
+
+    val mockCards = HomeMockRepositoryImpl().mockDashboardCards
 
     Scaffold(
         bottomBar = {
@@ -227,29 +235,40 @@ fun HomeScreen(
 
                 Spacer(modifier = Modifier.height(12.dp))
 
-                Box(
-                    modifier = Modifier.fillMaxSize(),
-                    contentAlignment = Alignment.TopCenter,
+                LazyColumn(
+                    modifier = Modifier
+                        .fillMaxSize()
+                        .padding(8.dp)
                 ) {
-                    Column(
-                        horizontalAlignment = Alignment.CenterHorizontally
-                    ) {
-                        Icon(
-                            imageVector = Icons.Default.Info,
-                            modifier = Modifier.size(120.dp),
-                            contentDescription = "searchoff",
-                            tint = Color.Gray,
-                        )
 
-                        Text(
-                            text = "Nenhuma atividade encontrada.",
-                            fontWeight = FontWeight.Bold,
-                            fontSize = 16.sp,
-                            textAlign = TextAlign.Center,
-                            modifier = Modifier.padding(top = 20.dp)
-                        )
+                    items(mockCards) { mock ->
+                        DashboardCardItem(mock)
                     }
                 }
+
+//                Box(
+//                    modifier = Modifier.fillMaxSize(),
+//                    contentAlignment = Alignment.TopCenter,
+//                ) {
+//                    Column(
+//                        horizontalAlignment = Alignment.CenterHorizontally
+//                    ) {
+//                        Icon(
+//                            imageVector = Icons.Default.Info,
+//                            modifier = Modifier.size(120.dp),
+//                            contentDescription = "searchoff",
+//                            tint = Color.Gray,
+//                        )
+//
+//                        Text(
+//                            text = "Nenhuma atividade encontrada.",
+//                            fontWeight = FontWeight.Bold,
+//                            fontSize = 16.sp,
+//                            textAlign = TextAlign.Center,
+//                            modifier = Modifier.padding(top = 20.dp)
+//                        )
+//                    }
+//                }
             }
         }
     }
